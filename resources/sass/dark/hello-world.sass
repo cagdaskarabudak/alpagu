@@ -1,0 +1,54 @@
+html[data-bs-theme="dark"]
+    pre
+        position: relative
+        background: $dark
+        border-left: 5px solid $success
+        border-right: 1px solid $info
+        border-top: 1px solid $info
+        border-radius: 5px
+        padding: 2%
+        border-bottom: 1px solid $info
+        color: $secondary
+        overflow: visible
+        display: block
+        button.copy-btn
+            position: absolute
+            top: -8px
+            right: -8px
+            border: $primary
+            border-radius: 5px
+            width: 25px
+            height: 25px
+            background-color: $dark
+            border: 1px solid $secondary
+            color: $white
+            transition: 0.3s
+            &:hover
+                background-color: rgb($primary, 0.5)
+            &:active
+                background-color: rgb($primary, 1)
+            &.copied
+                background-color: rgb($success, 1)
+            &.error
+                background-color: rgb($danger, 1)
+
+        code
+            color: $success
+            &::before
+                content: '#'
+                color: $primary
+
+    h1.hello-world
+        text-align: center
+        color: $success
+        &::before
+            content: '#'
+            color: $primary
+    .hello-worlds
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-wrap: wrap
+        pre
+            width: max-content
+            margin: 10px

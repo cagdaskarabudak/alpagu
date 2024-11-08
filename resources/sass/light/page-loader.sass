@@ -1,0 +1,32 @@
+html[data-bs-theme="light"]
+    .page-loader
+        display: flex 
+        justify-content: center
+        align-items: center
+        position: fixed
+        width: 100%
+        height: 100%
+        left: 0
+        top: 0
+        background: #f4f4f8
+        z-index: 9999
+        .page-loader-logo
+            position: absolute
+            width: 100px 
+            height: 100px 
+            object-fit: cover 
+            border-radius: 50%
+        .page-loader-spinner
+            position: absolute
+            width: 103px
+            height: 103px
+            display: block
+            background: linear-gradient(to right, transparent 30%, #232333 100%)
+            border-radius: 50%
+            animation: spin 0.5s linear infinite
+
+@keyframes spin
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate(360deg)

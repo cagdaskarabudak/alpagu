@@ -1,0 +1,38 @@
+html[data-bs-theme="dark"]
+    .customizer
+        position: fixed
+        z-index: 1003
+        right: 0
+        top: 25vh
+        width: 300px
+        min-height: 200px
+        transform: translateX(100%)
+        transition: transform 0.5s ease-in-out
+        .customizer-toggler
+            background: $dark
+            position: absolute
+            width: 50px
+            height: 50px
+            left: -50px
+            top: 0
+            border: none
+            border-radius: 5px 0 0 5px
+            display: flex
+            justify-content: center
+            align-items: center
+            border: 0.5px solid shade-color($dark, 50)
+            border-right: none
+            &:hover
+                .customizer-icon
+                    animation: spin 1s linear infinite
+        .customizer-body
+            display: block
+            background: $dark
+            width: 100%
+            height: 100%
+            border: 0.5px solid shade-color($dark, 50)
+            padding: 10px
+            border-radius: 0 0 0 5px
+            transition: 0.3s
+        &.show
+            transform: translateX(0)

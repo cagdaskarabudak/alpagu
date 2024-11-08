@@ -1,0 +1,107 @@
+$text-color: #394652
+html[data-bs-theme="light"]
+    body
+        background: $light-secondary
+        color: $text-color
+
+    .brand-filigran
+        opacity: 0.1
+        position: fixed
+        width: 100%
+        height: 100%
+        z-index: -1
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+
+    .modal-header
+        background: $light
+        color: $text-color
+    .modal-body
+        background: $light
+        color: $text-color
+    .modal-footer
+        background: $light
+        color: $text-color
+
+[data-bs-theme="light"]
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea
+        background: rgb($light, 0.5)
+        &:focus
+            background: $light-secondary
+            outline: none
+            box-shadow: none
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-success,
+    .btn-danger,
+    .btn-warning,
+    .btn-info,
+    .btn-dark
+        color: $light
+        &:hover
+            color: $light
+        &:active
+            color: $light
+        &:focus
+            color: $light
+        
+    .btn-outline-primary
+        &:hover
+            color: $light
+        &:active
+            color: $light
+    .btn-outline-secondary
+        &:hover
+            color: $light
+        &:active
+            color: $light
+    .btn-outline-success
+        &:hover
+            color: $light
+        &:active
+            color: $light
+    .btn-outline-danger
+        &:hover
+            color: $light
+        &:active
+            color: $light
+    .btn-outline-warning
+        &:hover
+            color: $light
+        &:active
+            color: $light
+    .btn-outline-info
+        &:hover
+            color: $light
+        &:active
+            color: $light
+    .btn-outline-dark
+        &:hover
+            color: $light
+        &:active
+            color: $light
+        
+    .btn-light
+        color: $dark
+        &:hover
+            color: $dark
+        &:active
+            color: $dark
+        &:focus
+            color: $dark
+
+    input[type="radio"]:checked + label.btn-outline-primary
+        color: $light
+
+    input[type="radio"] + label.btn-outline-primary
+        color: $primary
+    .card
+        backdrop-filter: blur(5px)
+        background: rgb($light, 0.5)

@@ -1,0 +1,202 @@
+html[data-bs-theme="light"]
+    .project
+        border: 0.5px solid shade-color($light, 50)
+        background: rgba($light, 0.9)
+        border-radius: 5px
+        min-height: 50vh
+        .project-header
+            padding-top: 10px
+            padding-bottom: 10px
+            border-bottom: 0.5px solid shade-color($light, 50)
+            display: flex
+            justify-content: space-between
+            align-items: center
+            .project-name
+                font-size: 20pt
+                font-weight: 700
+                flex: 1
+                display: flex
+                justify-content: center
+                align-items: start
+                flex-direction: column
+                span
+                    font-weight: 300
+                    font-size: 12pt
+            .project-links
+                flex: 2
+                display: flex
+                justify-content: end
+                align-items: center
+                gap: 10px
+                .project-github
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    gap: 5px
+                .project-demo
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    gap: 5px
+        .project-body
+            padding-top: 10px
+            padding-bottom: 10px
+            display: flex
+            justify-content: center
+            flex-wrap: wrap
+            .project-images
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                .title
+                    font-size: 14pt
+                    color: $secondary
+            .project-attributes
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                .title
+                    font-size: 14pt
+                    color: $secondary
+                .attribute-list
+                    padding: 0
+                    list-style-type: none
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    flex-direction: column
+                    .attribute
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        font-size: 12pt
+                        margin-bottom: 20px
+            .project-content
+                display: flex
+                justify-content: center
+                align-items: center
+                text-align: end
+                flex-direction: column
+                .title
+                    font-size: 14pt
+                    color: $secondary
+            .project-info
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                .project-technologies
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    flex-direction: column
+                    .title
+                        font-size: 14pt
+                        color: $secondary
+                    .technology-list
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        flex-wrap: wrap
+                        gap: 10px
+                        .technology
+                            display: flex
+                            justify-content: center
+                            align-items: start
+                            flex-direction: column
+                            border: 0.5px solid shade-color($light, 50)
+                            border-radius: 5px
+                            padding: 10px
+                            .name
+                                font-size: 14pt
+                                font-weight: 700
+                            .content
+                                font-size: 10pt
+                .project-contributors
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    flex-direction: column
+                    .title
+                        font-size: 14pt
+                        color: $secondary
+                    .contributor-list
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        flex-wrap: wrap
+                        gap: 10px
+                        .contributor
+                            display: flex
+                            justify-content: center
+                            align-items: start
+                            flex-direction: column
+                            border: 0.5px solid shade-color($light, 50)
+                            border-radius: 5px
+                            padding: 10px
+                            .name
+                                font-size: 14pt
+                                font-weight: 700
+                            .content
+                                font-size: 10pt
+                .project-end-info
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    flex-direction: column
+                    .open-source
+                        font-size: 18pt
+                        font-weight: 700
+                        color: $info
+                        text-shadow: 0 0 3px $info
+                    .price
+                        font-size: 16pt
+                        font-weight: 700
+                        color: $success
+                        text-shadow: 0 0 3px $success
+            .project-comments
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                .title
+                    font-size: 14pt
+                    color: $secondary
+                .comment-list
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    flex-wrap: wrap
+                    gap: 10px
+                    .comment
+                        border-radius: 5px
+                        padding: 10px
+                        max-width: 25%
+                        height: max-content
+                        border: 1px solid shade-color($light, 50)
+                        .header
+                            display: flex
+                            justify-content: space-between
+                            align-items: center
+                            margin-bottom: 10px
+                            .name
+                                font-weight: 700
+                        .content
+                            display: flex
+                            justify-content: start
+                            align-items: center
+                            flex-wrap: wrap
+                            word-break: break-word
+                            margin-bottom: 10px
+                        .footer
+                            display: flex
+                            justify-content: end
+                            align-items: center
+                            .date
+                                font-size: 10pt
+                                color: $secondary
+
+
+
