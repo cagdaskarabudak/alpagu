@@ -2,7 +2,7 @@
 
 
 
-## <img src="https://alpagu.net/alpagu.webp" width="50" style="border-radius: 5px;" alt="Alpagu Logo">Alpagu Blog and Personal Website Project | EN
+## <img src="https://alpagu.net/alpagu.webp" width="25" alt="Alpagu Logo"> Alpagu Blog and Personal Website Project | EN
 
 **Project Status:** *Developing*
 
