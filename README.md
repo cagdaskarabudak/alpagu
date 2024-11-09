@@ -1,7 +1,8 @@
 **Turkish: [README_TR.md](README_TR.md)**
 
-<img src="https://alpagu.net/alpagu.webp" width="50" style="border-radius: 5px;" alt="Alpagu Logo"> 
-## Alpagu Blog and Personal Website Project | EN
+
+
+## <img src="https://alpagu.net/alpagu.webp" width="50" style="border-radius: 5px;" alt="Alpagu Logo">Alpagu Blog and Personal Website Project | EN
 
 **Project Status:** *Developing*
 
