@@ -1,4 +1,4 @@
-## Alpagu Blog and Personal Website Project
+## Alpagu Blog and Personal Website Project | EN
 
 **Project Status:** *Developing*
 
