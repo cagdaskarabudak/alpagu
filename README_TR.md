@@ -1,6 +1,6 @@
 **English: [README.md](README.md)**
 
-## Alpagu Blog ve Kişisel Web Sitesi Projesi | TR
+## <img src="https://alpagu.net/alpagu.webp" width="25" alt="Alpagu Logo"> Alpagu Blog ve Kişisel Web Sitesi Projesi | TR
 
 **Proje Durumu:** *Geliştirilme Aşamasında*
 
