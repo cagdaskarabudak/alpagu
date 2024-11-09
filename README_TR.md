@@ -1,7 +1,5 @@
 ## Alpagu Blog and Personal Website Project | EN
 
-**[README_TR.md](README_TR.md) for Turkish Language**
-
 **Project Status:** *Developing*
 
 **Technologies used:**
