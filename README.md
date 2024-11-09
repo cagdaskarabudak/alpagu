@@ -1,13 +1,6 @@
 **Turkish: [README_TR.md](README_TR.md)**
 
-<p align="center">
-	<a href="https://laravel.com" target="_blank">
-		<img src="https://alpagu.net/alpagu.webp" width="400" alt="Alpagu Logo">
-	</a>
-</p>
-
-
-## Alpagu Blog and Personal Website Project | EN
+<img src="https://alpagu.net/alpagu.webp" width="100" alt="Alpagu Logo"> ## Alpagu Blog and Personal Website Project | EN
 
 **Project Status:** *Developing*
 
