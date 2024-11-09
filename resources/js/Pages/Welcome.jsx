@@ -24,10 +24,10 @@ export default function Welcome({ auth }) {
     return (
         <>
             <Head title={t('Home')} />
-
             <MainLayout auth={auth}>
                 <h1 className="hello-world">{t('Hello, World!')}</h1>
                 <div className="hello-worlds">
+
                     <pre className="language-c">
                         <div>C</div>
                         <button className="copy-btn" data-code-target="language-c" onClick={copyCode}><i className="fa-solid fa-copy"></i></button>

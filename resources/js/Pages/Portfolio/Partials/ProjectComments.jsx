@@ -21,7 +21,7 @@ export default function ProjectComments({comments}){
     }, []);
 
     return (
-        <div class={'comment-list'}>
+        <div className={'comment-list'}>
             {commentDoms}
         </div>
     );

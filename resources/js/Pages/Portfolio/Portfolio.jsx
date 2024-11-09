@@ -17,8 +17,8 @@ export default function Portfolio({projects}) {
                         <div className="card-text" style={{color: project.status.color}}>{project.status.name}</div>
                     </div>
                     <div className="card-footer d-flex justify-content-between">
-                        <small className="text-secondary">Views: {project.view_count}</small>
-                        <small className="text-secondary">Comments: {project.comments.length}</small>
+                        <small className="text-secondary"><i className="fa-solid fa-eye"></i> {project.view_count}</small>
+                        <small className="text-secondary"><i className="fa-solid fa-messages"></i> {project.comments.length}</small>
                     </div>
                 </Link>
             </div>

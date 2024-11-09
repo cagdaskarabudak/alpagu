@@ -67,7 +67,7 @@ export default function LightBox({images, defaultStorage='/storage/images/projec
     }
 
     return (
-        <>
+        <div>
             <div className={"lightbox-gallery"}>
                 {imageDoms}
             </div>
@@ -79,6 +79,6 @@ export default function LightBox({images, defaultStorage='/storage/images/projec
                     <img src="" alt="" ref={lightBoxViewImage}/>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

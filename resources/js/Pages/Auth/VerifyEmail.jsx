@@ -14,6 +14,10 @@ export default function VerifyEmail({ status }) {
         <MainLayout>
             <Head title="Email Verification" />
 
+<div className="row justify-content-center">
+    <div className="col-lg-6">
+        <div className="card">
+            <div className="card-body">
             <div className="mb-4 text-sm text-gray-600">
                 Thanks for signing up! Before getting started, could you verify
                 your email address by clicking on the link we just emailed to
@@ -30,7 +34,7 @@ export default function VerifyEmail({ status }) {
 
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
-                    <button class={'btn btn-primary'} disabled={processing}>
+                    <button className={'btn btn-primary me-2'} disabled={processing}>
                         Resend Verification Email
                     </button>
 
@@ -38,12 +42,17 @@ export default function VerifyEmail({ status }) {
                         href={route('logout')}
                         method="post"
                         as="button"
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="btn btn-secondary"
                     >
                         Log Out
                     </Link>
                 </div>
             </form>
+            </div>
+        </div>
+    </div>
+</div>
+
         </MainLayout>
     );
 }

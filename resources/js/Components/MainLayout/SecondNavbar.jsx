@@ -28,6 +28,26 @@ export default function SecondNavbar({children}) {
                         </>
                     ) : (
                         <>
+                        {
+                            auth.user.role.id == 1 && (
+
+                                <li className={"nav-item" + (route().current() === 'dashboard' ? ' active' : '')}>
+                                <Link href={route('dashboard')} className={'nav-link' + (route().current() === 'dashboard' ? ' active' : '')} as="a">
+                                <i className="fa-solid fa-chart-tree-map"></i> {t('Dashboard')}
+                                </Link>
+                                </li>
+                            )
+                        }
+                        {
+                            auth.user.role.id == 3 && (
+
+                                <li className={"nav-item" + (route().current() === '' ? ' active' : '')}>
+                                <Link href={'#'} className={'nav-link' + (route().current() === '' ? ' active' : '')} as="a">
+                                    <i className="fa-solid fa-plus"></i> {t('Create Article')}
+                                </Link>
+                                </li>
+                            )
+                        }
                             <li className="nav-item dropdown">
                                 <button type='button' className="nav-link" data-bs-toggle="dropdown"><i className="fa-solid fa-user"></i> {t('Account')}</button>
                                 <div className="dropdown-menu">

@@ -9,6 +9,8 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ThemeModeController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -23,6 +25,9 @@ Route::get('/get-default-localization', [LocalizationController::class, 'get_def
 
 Route::get('/get-default-theme-mode', [ThemeModeController::class, 'get_default_theme_mode']);
 Route::post('/set-default-theme-mode', [ThemeModeController::class, 'set_default_theme_mode']);
+
+Route::get('/blog', [BlogController::class, 'view'])->name('blog');
+Route::get('/article/{slug}.{id}', [ArticleController::class, 'view'])->name('article');
 
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/dashboard', function () {

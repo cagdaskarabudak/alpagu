@@ -24,7 +24,7 @@ export default function Register() {
             <Head title={t('Sign Up')} />
 <div className="row justify-content-center">
     <div className="col-lg-6">
-        <div className="card bg-dark">
+        <div className="card">
             <div className="card-header">
                 <div className="card-title">
                     {t('Sign Up')}

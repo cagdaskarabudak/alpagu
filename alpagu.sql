@@ -11,11 +11,39 @@
  Target Server Version : 80300 (8.3.0)
  File Encoding         : 65001
 
- Date: 08/11/2024 13:43:31
+ Date: 09/11/2024 08:27:25
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for blog_article_comments
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_article_comments`;
+CREATE TABLE `blog_article_comments` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` bigint unsigned NOT NULL,
+  `rate` int NOT NULL DEFAULT '0',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `blog_article_comments_article_id_foreign` (`article_id`),
+  KEY `blog_article_comments_user_id_foreign` (`user_id`),
+  CONSTRAINT `blog_article_comments_article_id_foreign` FOREIGN KEY (`article_id`) REFERENCES `blog_articles` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `blog_article_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of blog_article_comments
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for blog_articles
@@ -34,12 +62,32 @@ CREATE TABLE `blog_articles` (
   PRIMARY KEY (`id`),
   KEY `blog_articles_author_id_foreign` (`author_id`),
   CONSTRAINT `blog_articles_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of blog_articles
 -- ----------------------------
 BEGIN;
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (1, 1, 'Qui facilis sed', 'quod-impedit-fuga-aliquid', 'Et blanditiis dolor id. Dolorem ab veniam ipsa voluptas et. Nam deleniti non consequuntur aspernatur voluptatem. Voluptatem sunt unde dignissimos aut harum adipisci.', 11, '1', '2024-11-08 22:39:52', '2024-11-08 22:39:52');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (2, 1, 'Eligendi facilis', 'et-sunt-similique-eos-ut', 'Rerum natus doloremque alias repudiandae. Est id fugit quo labore et. Dolore aut quis non repudiandae error. Debitis magnam illum eveniet aspernatur. Accusamus ut dolor a sunt.', 22, '1', '2024-11-08 22:39:52', '2024-11-08 22:39:52');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (3, 1, 'Qui voluptatum', 'veritatis-minima-expedita-voluptatem-corrupti-tenetur-et-ut', 'Neque a minima non quia eum. In aspernatur rem quia assumenda consequatur cumque. Dolorum quia consequuntur doloremque nulla quia reprehenderit.', 86, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (4, 1, 'Voluptates hic', 'id-repellendus-vel-aliquam-quo-temporibus-consequatur', 'Perferendis voluptates temporibus eum ipsam. Consequatur consectetur pariatur placeat impedit. Ullam illum ut repellat quia aut sit. Commodi a voluptatem tempora omnis minus.', 20, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (5, 1, 'Sint quam aperiam', 'et-ea-a-cumque-necessitatibus-et-corporis-praesentium-veniam', 'Harum est nihil inventore aut qui. Corrupti quam neque possimus at aut sed consectetur pariatur. Explicabo ea quis nisi et sit. Voluptatem et quia provident voluptatibus sunt voluptatem.', 57, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (6, 1, 'Facilis aspernatur', 'facilis-at-ullam-non-placeat-odit', 'Sint aliquid recusandae nemo omnis tempore sint. Et dolores quaerat quis. Reiciendis quia molestias est et. Possimus cupiditate libero reprehenderit non sunt dolor accusamus.', 92, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (7, 1, 'In et', 'velit-veniam-sed-rerum-et-impedit', 'Porro aspernatur omnis quam facilis non. Dolor voluptas vel magnam enim nemo qui et. Ut dolores quas rem quidem ea recusandae veritatis. Dicta officia et ut voluptatem sunt fuga.', 12, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (8, 1, 'Incidunt cum ducimus', 'eveniet-vitae-non-officiis-et-architecto-est-est-ratione', 'Recusandae explicabo quae voluptatem id ab. Vel necessitatibus provident dolore ut ab dolorum molestiae quia. Maiores culpa non asperiores architecto.', 77, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (9, 1, 'Aut eius', 'fugit-consequatur-sint-consectetur-est-autem-quasi-esse', 'Quia quidem laborum aut itaque dolores. Consequatur ratione eum magni dolorum voluptatem dolores autem.', 93, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (10, 1, 'Voluptates consequatur est', 'sit-ipsa-cumque-mollitia-ipsum-aut-rerum-eos', 'Sit eum voluptate laborum facere. Dolorum laudantium natus est libero dolor cupiditate. Minus rerum quasi corrupti. Blanditiis officia animi quam cum cumque quasi. Dolor aut reprehenderit ea ea quas.', 92, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (11, 1, 'Dicta harum', 'nulla-qui-consequatur-laboriosam-molestiae', 'Vel voluptate itaque sit voluptas. Ut vel architecto magnam omnis odio. Optio commodi fuga quidem et ut expedita.', 49, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (12, 1, 'Delectus eaque', 'qui-impedit-illo-tempore-quo', 'Et nihil eum totam sint possimus. Voluptatem similique aut est eos est natus. Laudantium vero impedit laboriosam dolore. Optio numquam magnam qui nulla possimus.', 15, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (13, 1, 'Ab accusantium', 'commodi-excepturi-mollitia-consequatur-sint-unde', 'Quos sunt consequatur et et. Cumque maxime veritatis iure et quia sapiente. Maxime sunt dicta numquam. Perspiciatis assumenda alias pariatur et dignissimos vitae.', 24, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (14, 1, 'Dicta delectus possimus', 'eius-voluptatum-magni-et-in-tenetur-dolor-inventore-neque', 'Qui sapiente perferendis at modi qui ea ipsam dolor. Est est aperiam tempore ullam odit cumque optio. Ea a quia voluptas est id. Ipsam dolorum velit sit sit necessitatibus sequi.', 33, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (15, 1, 'Quis suscipit ratione', 'in-et-voluptas-officia-voluptatum-reiciendis-esse', 'Necessitatibus qui quas quo. Est velit modi animi. Laudantium dolorum id qui.', 86, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (16, 1, 'Voluptatem officia', 'harum-debitis-nam-maxime', 'Tenetur pariatur amet et eveniet. Natus autem consectetur voluptatem iure qui eos voluptate laudantium.', 33, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (17, 1, 'Ea laborum sint', 'id-odio-eos-sunt-non', 'Voluptatem maxime impedit sint deleniti. Nisi repellat animi dolorem repellat sit at vel. Mollitia ex ea accusamus explicabo velit. Facere incidunt hic assumenda magni et.', 71, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (18, 1, 'Nemo et', 'illum-illo-est-voluptates-reprehenderit-nesciunt-earum', 'Vero aut ea illum ratione ut totam. Culpa in facilis natus nulla. Repellendus aut necessitatibus eaque quis rem id quasi.', 14, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (19, 1, 'Eum et reiciendis', 'unde-odit-reprehenderit-deserunt-provident-distinctio', 'Quaerat accusamus possimus ut odit nobis. Placeat et quis nulla doloribus. Sit fugit facilis omnis omnis. Dolorum aut odit sed vel facere doloremque eveniet.', 17, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (20, 1, 'Dolorum nam', 'eveniet-laboriosam-ullam-odit-nihil-est-dolores', 'Nam exercitationem facere libero deserunt quo nesciunt. Aut labore aut eligendi dolor provident fugit adipisci. Sed harum nulla est aliquam voluptas. Rerum autem eum rerum neque doloribus.', 54, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
 COMMIT;
 
 -- ----------------------------
@@ -97,8 +145,8 @@ CREATE TABLE `cache` (
 -- Records of cache
 -- ----------------------------
 BEGIN;
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('356a192b7913b04c54574d18c28d46e6395428ab', 'i:2;', 1731026338);
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('356a192b7913b04c54574d18c28d46e6395428ab:timer', 'i:1731026338;', 1731026338);
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('356a192b7913b04c54574d18c28d46e6395428ab', 'i:1;', 1731113976);
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('356a192b7913b04c54574d18c28d46e6395428ab:timer', 'i:1731113976;', 1731113976);
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('da4b9237bacccdf19c0760cab7aec4a8359010b0', 'i:1;', 1731016327);
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('da4b9237bacccdf19c0760cab7aec4a8359010b0:timer', 'i:1731016327;', 1731016327);
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES ('example@example.com|127.0.0.1', 'i:1;', 1731016482);
@@ -266,8 +314,8 @@ INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Projects', 'Projects');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Blog', 'Blog');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Blog', 'Blog');
-INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'About Me', 'Hakkımızda');
-INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'About Me', 'About Me');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'About Us', 'Hakkımızda');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'About Us', 'About Us');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Contact', 'İletişim');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Contact', 'Contact');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Profile', 'Profil');
@@ -302,6 +350,16 @@ INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Member', 'Member');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Author', 'Yazar');
 INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Author', 'Author');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.', 'Forgot your password? No problem. Just let us know your email\n address and we will email you a password reset link that will\n allow you to choose a new one.');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.', 'Şifrenizi mi unuttunuz? Sorun değil. Bize e-posta adresinizi bildirin ve size yeni bir tane seçmenize olanak sağlayacak bir\nşifre sıfırlama bağlantısı gönderelim.');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Email Password Reset Link', 'Email Password Reset Link');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Email Password Reset Link', 'E-posta Şifre Sıfırlama Bağlantısı');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'We have emailed your password reset link.', 'We have emailed your password reset link.');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'We have emailed your password reset link.', 'Şifre sıfırlama bağlantınızı e-postayla gönderdik.');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Dashboard', 'Yönetim Paneli');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Dashboard', 'Dashboard');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('tr', 'Create Article', 'Yazı Oluştur');
+INSERT INTO `localization_terms` (`localization_code`, `term`, `content`) VALUES ('en', 'Create Article', 'Create Article');
 COMMIT;
 
 -- ----------------------------
@@ -334,7 +392,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
@@ -356,6 +414,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (13, '2024_11_08_04
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (14, '2024_11_08_095021_create_blog_categories_table', 6);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (15, '2024_11_08_095038_create_blog_articles_table', 6);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (16, '2024_11_08_095114_create_blog_category_blog_articles_table', 6);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (17, '2024_11_08_100211_create_blog_article_comments_table', 7);
 COMMIT;
 
 -- ----------------------------
@@ -373,6 +432,8 @@ CREATE TABLE `password_reset_tokens` (
 -- Records of password_reset_tokens
 -- ----------------------------
 BEGIN;
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES ('author@user.com', '$2y$12$nMT6Cy96UGMSxQq9FsAq/uH6MA58ljl3fXYVw9wSYIIVwWtp751yi', '2024-11-09 00:44:33');
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES ('cagdaskarabudak@outlook.com', '$2y$12$X2l8BXSjm4DWd/o3L.cBIuNfUN4o0lPgXpzTYrkYQ5Y5BZ1nUp6XG', '2024-11-09 00:42:22');
 COMMIT;
 
 -- ----------------------------
@@ -671,7 +732,14 @@ CREATE TABLE `sessions` (
 -- Records of sessions
 -- ----------------------------
 BEGIN;
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('wsuC8CcjGV6t06KoVmVZaOo8SmYYmm4LqgENCDVT', 4, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaU9UaHg0VHNLMzJoMjY1bzk1azVWNlFOazI3UHhCYXRySDN4UUQ2ayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6NDtzOjM6InVybCI7YToxOntzOjg6ImludGVuZGVkIjtzOjMxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvZGFzaGJvYXJkIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9wb3J0Zm9saW8iO319', 1731061869);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('4gKjKFkIzZQOhKM1b2nAe26TEroASvquTphiPQH1', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRGZpYU9GUDlvTGFSWVN4OXpEd1lITFI3R1FMMWtNMHU1Y0VNUWRlNSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6MTg6ImRlZmF1bHRfdGhlbWVfbW9kZSI7czo0OiJkYXJrIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1731126464);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('FgcWjn8EbjQqjA6J90CFmU8yFRH32o2uu30ydhQR', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOUFOdFlOWXJ1VEVGSVlsSW9NdmE1SXRsdHV5czVkUVlReFZRR0RwRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO3M6MTg6ImRlZmF1bHRfdGhlbWVfbW9kZSI7czo1OiJsaWdodCI7fQ==', 1731129532);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('gj46HdSUKILEsU9WZsAM6slTtx9f5JQqjYnK4aCH', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibjkwZm01QmVId09nY3dpQWI3YXZkcTIwakx1Q3JESWpOb2R3eWduQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO30=', 1731129539);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('hkHRmrP7NfpU6x09ehJY1nkiUyyGejGXPlzzZBQR', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaEFkN1dqY0ZhOWJwb1pXdnJDcGJTNFB4MGR5a21EcnlSTTZ4OXoyYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czoxODoiZGVmYXVsdF90aGVtZV9tb2RlIjtzOjU6ImxpZ2h0IjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI2OiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYmxvZyI7fX0=', 1731129638);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('nJdlP1uK7uwSKwHOPiKSzXQfWehxySR3USxBMZvG', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWW1LZHlUaWdMWFdvbzFWaWVrZmxiZmZkUm9nTG9MbWRYT0JZYVFJVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7fQ==', 1731128354);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('NZQnhbAddsweLmE0u3KKeBWlF43nMxSGLuQ7rh6z', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUHYxNlNKR2Q4WUhMZnJoallySEoxVGtXclRkaEJ1THk0V0h2ZWozcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoidHIiO30=', 1731127092);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('uSiUv7VIj6epNEaU1HyMCkTJOdvSHvvQ5Ye0pWpB', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTUxDTVlDZ3ByaG1wTXBTelpOcHFxSEFVMzFjQktTRkE3dmRkYzhhVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO30=', 1731129622);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('vZd7P6uOzEgj3vEtEfPyThZVaGfZywLox91XF2n6', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZWh3WjZud0QzRmpEZFE3cGZ3alBZUGxkZlNVaDU0YTZKT3d0V1lENSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO30=', 1731128051);
 COMMIT;
 
 -- ----------------------------
@@ -700,9 +768,9 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (1, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', NULL, '$2y$12$z94V321JiwvGBGfGuiUQv.Yb9nslDO7H0/BWGHXxVMu008eP5y4i2', 1, NULL, 'tr', 'dark', '2024-11-06 02:11:19', '2024-11-08 05:28:03');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (1, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', NULL, '$2y$12$z94V321JiwvGBGfGuiUQv.Yb9nslDO7H0/BWGHXxVMu008eP5y4i2', 1, NULL, 'en', 'dark', '2024-11-06 02:11:19', '2024-11-09 05:13:45');
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (3, 'Author User', 'author@user.com', NULL, '$2y$12$4/VAovwusqbBXF89lDlgAuebeobMgldz7rLILCMry1d6TQ9.D2isy', 3, NULL, 'tr', 'dark', '2024-11-08 05:35:15', '2024-11-08 05:36:34');
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (4, 'Member User', 'member@member.com', NULL, '$2y$12$5kUaglc7K6aL4EauwesPtuNMIL.wBUgnBXCA.CImvB9TfRaH53OHC', 2, NULL, 'tr', 'light', '2024-11-08 05:37:07', '2024-11-08 10:30:37');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (4, 'Member User', 'member@member.com', NULL, '$2y$12$5kUaglc7K6aL4EauwesPtuNMIL.wBUgnBXCA.CImvB9TfRaH53OHC', 2, NULL, 'tr', 'dark', '2024-11-08 05:37:07', '2024-11-09 00:06:06');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

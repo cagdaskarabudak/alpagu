@@ -29,7 +29,7 @@ export default function Login({ status, canResetPassword }) {
             )}
             <div className="row justify-content-center">
                 <div className="col-lg-6">
-                    <div className="card bg-dark">
+                    <div className="card">
                         <div className="card-header">
                             <div className="card-title">{t('Sign In')}</div>
                         </div>
@@ -89,7 +89,7 @@ export default function Login({ status, canResetPassword }) {
                                     {canResetPassword && (
                                         <Link
                                             href={route('password.request')}
-                                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                            className="link-secondary"
                                         >
                                             {t('Forgot your password?')}
                                         </Link>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" data-bs-theme="<?php echo e(Auth::check() ? (Auth::user()->default_theme_mode != '' ? Auth::user()->default_theme_mode : (session()->has('default_theme_mode') ? session()->get('default_theme_mode') : 'light')) : 'light'); ?>">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

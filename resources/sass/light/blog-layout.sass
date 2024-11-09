@@ -1,0 +1,390 @@
+html[data-bs-theme="light"]
+    .blog-sidebar
+        .blog-sidebar-card
+            .card-header
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                .card-title
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    font-size: 12pt
+                    column-gap: 10px
+                    color: $text-color
+                .card-subtitle
+                    font-size: 8pt
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    color: $text-color
+                    font-weight: 100
+            .card-article-info
+                display: flex
+                justify-content: space-between
+                align-items: center
+                flex-wrap: wrap
+                .rate
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    width: 100%
+                    gap: 5px
+                    margin-bottom: 10px
+                    .rate-amount
+                        font-size: 12pt
+                    .rate-count
+                        font-size: 8pt
+                        color: $secondary
+                .name
+                    font-size: 14pt
+                    text-align: center
+                    width: 100%
+                    margin-bottom: 10px
+                .date
+                    text-align: center
+                    font-size: 8pt
+                    width: 100%
+                    margin-bottom: 20px
+                .comments
+                    text-align: end
+                    font-size: 10pt
+                    width: 50%
+                .views
+                    text-align: start
+                    font-size: 10pt
+                    width: 50%
+            .card-category-list
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-wrap: wrap
+                width: 100%
+                column-gap: 5px
+                row-gap: 5px
+                .category
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    text-decoration: none
+                    border-radius: 5px
+                    color: $text-color
+                    width: 48%
+                    height: 30px
+                    border: 0.5px solid shade-color($light, 50)
+                    transition: 0.3s
+                    &:hover
+                        background: shade-color($light-secondary, 5)
+            .card-article-list
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-wrap: wrap
+                width: 100%
+                row-gap: 5px
+                .article
+                    display: flex
+                    flex-wrap: nowrap
+                    text-decoration: none
+                    border: 0.5px solid shade-color($light, 50)
+                    transition: 0.3s
+                    color: $text-color
+                    border-radius: 5px
+                    width: 100%
+                    height: 150px
+                    &:hover
+                        background: shade-color($light-secondary, 5)
+                    .banner
+                        display: block
+                        height: 100%
+                        width: 30%
+                        border-radius: 5px 0 0 5px
+                        overflow: hidden
+                        img
+                            width: 100%
+                            height: 100%
+                            object-fit: cover
+                    .content
+                        display: flex
+                        justify-content: space-between
+                        align-items: center
+                        flex-wrap: wrap
+                        width: 70%
+                        padding: 10px
+                        .title
+                            width: 100%
+                            text-align: start
+                            font-weight: 700
+                        .author
+                            width: 50%
+                            text-align: start
+                        .rate
+                            width: 50%
+                            display: flex
+                            justify-content: end
+                            align-items: center
+                            gap: 5px
+                            font-size: 10pt
+                            .rate-amount
+                                font-size: 12pt
+                            .rate-count
+                                font-size: 8pt
+                                color: $secondary
+                        .date
+                            width: 100%
+                            font-size: 8pt
+                            text-align: center
+                        .views
+                            width: 50%
+                            font-size: 8pt
+                            text-align: start
+                        .comments
+                            width: 50%
+                            font-size: 8pt
+                            text-align: end
+            .card-comment-list
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-wrap: wrap
+                width: 100%
+                row-gap: 5px
+                .comment
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    flex-wrap: wrap
+                    border: 0.5px solid shade-color($light, 50)
+                    border-radius: 5px
+                    width: 100%
+                    text-decoration: none
+                    color: $text-color
+                    padding: 10px
+                    transition: 0.3s
+                    &:hover
+                        background: shade-color($light-secondary, 5)
+                    .content
+                        font-size: 10pt
+                        width: 100%
+                        text-align: center
+                    .title
+                        font-size: 10pt
+                        font-weight: 700
+                        width: 100%
+                        text-align: center
+                    .name
+                        width: 50%
+                        text-align: start
+                        font-size: 8pt
+                    .date
+                        width: 50%
+                        font-size: 8pt
+                        text-align: end
+
+html[data-bs-theme="light"]
+    .blog-header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-bottom: 10px
+        .filter-tools
+            display: flex
+            justify-content: center
+            align-items: center
+            gap: 10px
+            input[type="radio"]:checked + label
+                color: $light
+                &:hover
+                    color: $light
+            input[type="radio"] + label
+                color: $info
+                &:hover
+                    color: $info
+    .blog-article-list
+        &.grid
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-wrap: wrap
+            gap: 10px
+            width: 100%
+            .article
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                width: 30%
+                height: 300px
+                border: 0.5px solid shade-color($light, 50)
+                border-radius: 5px
+                text-decoration: none
+                color: $text-color
+                overflow: hidden
+                backdrop-filter: blur(5px)
+                background: rgb($light, 0.5)
+                transition: 0.3s
+                .banner
+                    width: 100%
+                    height: 40%
+                    img
+                        width: 100%
+                        height: 100%
+                        object-fit: cover
+                .content
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    flex-wrap: wrap
+                    height: 60%
+                    padding: 5px
+                    .title
+                        width: 100%
+                        font-weight: 700
+                        text-align: center
+                    .content
+                        display: block
+                        width: 100%
+                        height: 30%
+                        font-size: 8pt
+                        text-align: center
+                        word-wrap: break-word
+                        overflow: hidden
+                        text-overflow: ellipsis
+                        display: -webkit-box
+                        -webkit-line-clamp: 3
+                        line-clamp: 3
+                        -webkit-box-orient: vertical
+                    .rate
+                        width: 100%
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        gap: 5px
+                        font-size: 10pt
+                        .rate-amount
+                            font-size: 12pt
+                        .rate-count
+                            font-size: 8pt
+                            color: $secondary
+                    .author
+                        width: 50%
+                        font-size: 10pt
+                        text-align: start
+                    .date
+                        width: 50%
+                        font-size: 10pt
+                        text-align: end
+                    .comments
+                        width: 50%
+                        font-size: 8pt
+                        text-align: start
+                    .views
+                        width: 50%
+                        font-size: 8pt
+                        text-align: end
+        &.list
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-wrap: wrap
+            gap: 10px
+            width: 100%
+            .article
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 100%
+                height: 200px
+                border: 0.5px solid shade-color($light, 50)
+                border-radius: 5px
+                text-decoration: none
+                color: $text-color
+                overflow: hidden
+                backdrop-filter: blur(5px)
+                background: rgb($light, 0.5)
+                transition: 0.3s
+                .banner
+                    width: 30%
+                    height: 100%
+                    img
+                        width: 100%
+                        height: 100%
+                        object-fit: cover
+                .content
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    flex-wrap: wrap
+                    height: 60%
+                    width: 70%
+                    padding: 5px
+                    .title
+                        width: 100%
+                        font-weight: 700
+                        text-align: center
+                    .content
+                        display: block
+                        width: 100%
+                        height: 30%
+                        font-size: 8pt
+                        text-align: center
+                        word-wrap: break-word
+                        overflow: hidden
+                        text-overflow: ellipsis
+                        display: -webkit-box
+                        -webkit-line-clamp: 3
+                        line-clamp: 3
+                        -webkit-box-orient: vertical
+                        margin-bottom: 10px
+                    .rate
+                        width: 100%
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        gap: 5px
+                        font-size: 10pt
+                        .rate-amount
+                            font-size: 12pt
+                        .rate-count
+                            font-size: 8pt
+                            color: $secondary
+                    .author
+                        width: 50%
+                        font-size: 10pt
+                        text-align: start
+                    .date
+                        width: 50%
+                        font-size: 10pt
+                        text-align: end
+                    .comments
+                        width: 50%
+                        font-size: 8pt
+                        text-align: start
+                    .views
+                        width: 50%
+                        font-size: 8pt
+                        text-align: end
+
+html[data-bs-theme="light"]
+    .article-page
+        backdrop-filter: blur(5px)
+        background: rgb($light, 0.5)
+        width: 100%
+        min-height: 50vh
+        border-radius: 5px
+        overflow: hidden
+        .article-banner
+            width: 100%
+            height: 300px
+            margin-bottom: 10px
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+        .article-title
+            font-size: 16pt
+            text-align: center
+        .article-content
+            padding: 10px
+

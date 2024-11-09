@@ -4,17 +4,23 @@ import { useTranslation } from 'react-i18next';
 
 export default function Customizer(){
     const customizer_status = usePage().props.auth.customizer;
+    if(customizer_status){
     const [customizer, setCustomizer] = useState(false);
     const [themeMode, setThemeMode] = useState(null);
     const [themeModeDoms, setThemeModeDoms] = useState([]);
 
-    const [defaultLang, setDefaultLang] = useState('en');
+    const [defaultLang, setDefaultLang] = useState(null);
     const [lang, setLang] = useState(defaultLang);
     const [localizationDoms, setLocalizationDoms] = useState([]);
     const [localizations, setLocalizations] = useState([]);
 
     useEffect(() => {
-        document.querySelector('html').setAttribute('data-bs-theme', themeMode);
+        if(themeMode != null){
+            if(document.querySelector('html').getAttribute('data-bs-theme') != themeMode){
+                 document.querySelector('html').setAttribute('data-bs-theme', themeMode);
+                 console.log('değiştirildi!');
+            }
+        }
     }, [themeMode]);
 
     useEffect(() => {
@@ -71,7 +77,7 @@ export default function Customizer(){
         const fetchDefaultLocalization = async () => {
             let defaultLocalization = await axios.get('/get-default-localization');
         
-            setDefaultLang(defaultLocalization ?  defaultLocalization.data.code : 'en');
+            setDefaultLang(defaultLocalization ? defaultLocalization.data.code : 'en');
         }
         fetchDefaultLocalization();
         const localizationElements = localizations.map((localization, index) => (
@@ -95,7 +101,10 @@ export default function Customizer(){
     }, [localizations]);
 
     useEffect(() => {
-        setLang(defaultLang);
+        if(defaultLang != null){
+            setLang(defaultLang);    
+        }
+        
     }, [defaultLang]);
 
     const toggleCustomizer = () => {
@@ -105,7 +114,10 @@ export default function Customizer(){
     const { i18n } = useTranslation();
 
     useEffect(() => {
-        i18n.changeLanguage(lang);
+        if(i18n.language != lang){
+            i18n.changeLanguage(lang);
+            console.log('lang changed: ', lang);
+        }
     }, [lang])
 
     const toggleLang = (event) => {
@@ -134,7 +146,6 @@ export default function Customizer(){
             console.log(setDefaultThemeMode.data.message);
         }
     }
-    if(customizer_status){
         return (
             <div className={'customizer'+(customizer ? ' show' : '')}>
                 <button className='customizer-toggler' onClick={toggleCustomizer}><i className="customizer-icon fa-duotone fa-solid fa-gear"></i></button>
@@ -158,9 +169,8 @@ export default function Customizer(){
             </div>
         );
     }
-    else {
-        return ('');
+    else{
+        return null;
     }
-    
 
 }
