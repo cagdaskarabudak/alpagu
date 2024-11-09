@@ -73,5 +73,5 @@
 	- Rating Bileşeni geliştirildi (rate-stars gibi kütüphanelere benzer şekilde çalışır).
 	- Lightbox Bileşeni revize edildi ve hatalar giderildi.
 
-## Contact
-*For contact please send an email to [cagdaskarabudak@outlook.com](mailto:cagdaskarabudak@outlook.com).*
+## İletişim
+*İletişim için lütfen [cagdaskarabudak@outlook.com](mailto:cagdaskarabudak@outlook.com) adresine mail gönderin.*
