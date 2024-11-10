@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useForm, usePage } from '@inertiajs/react';
 
 export default function LiveChat(){
-    const chat_status = usePage().props.auth.chat;
+    const chat_status = usePage().props.chat;
 
     if(chat_status){
         const livechatbody = useRef();

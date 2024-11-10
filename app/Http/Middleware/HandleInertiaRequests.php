@@ -33,9 +33,9 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
-                'chat' => false,
-                'customizer' => true,
             ],
+            'chat' => false,
+            'customizer' => true,
         ];
     }
 }

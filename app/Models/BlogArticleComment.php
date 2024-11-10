@@ -16,6 +16,12 @@ class BlogArticleComment extends Model
         'user_id',
         'ip_address',
         'content',
+        'reply_comment_id',
+    ];
+
+    protected $with = [
+        'reply_comments',
+        'user',
     ];
 
     public function article(){
@@ -24,5 +30,9 @@ class BlogArticleComment extends Model
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function reply_comments(){
+        return $this->hasMany(BlogArticleComment::class, 'reply_comment_id', 'id');
     }
 }

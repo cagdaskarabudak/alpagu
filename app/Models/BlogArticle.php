@@ -26,10 +26,11 @@ class BlogArticle extends Model
 
     protected $appends = [
         'total_rate',
+        'comment_groups',
     ];
 
     public function comments(){
-        return $this->hasMany(BlogArticleComment::class, 'article_id', 'id');
+        return $this->hasMany(BlogArticleComment::class, 'article_id', 'id')->orderBy('created_at', 'desc');
     }
 
     public function author(){
@@ -38,6 +39,18 @@ class BlogArticle extends Model
 
     public function categories(){
         return $this->belongsToMany(BlogCategory::class, BlogCategoryBlogArticle::class, 'category_id', 'id', 'id', 'article_id');
+    }
+
+    public function getCommentGroupsAttribute(){
+        $comment_groups = [];
+
+        foreach($this->comments as $comment){
+            if($comment->reply_comment_id == null){
+                $comment_groups[] = [$comment, ...$comment->reply_comments->all()];
+            }
+        }
+
+        return $comment_groups;
     }
 
     public function getTotalRateAttribute(){

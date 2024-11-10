@@ -25,14 +25,14 @@ class Project extends Model
     protected $with = [
         'status',
         'images',
-        'comments',
         'attributes',
         'contributors',
         'technologies',
     ];
 
-    protected $append = [
+    protected $appends = [
         'total_rate',
+        'comment_groups',
     ];
 
     public function images(){
@@ -40,7 +40,7 @@ class Project extends Model
     }
 
     public function comments(){
-        return $this->hasMany(ProjectComment::class, 'project_id', 'id');
+        return $this->hasMany(ProjectComment::class, 'project_id', 'id')->orderBy('created_at', 'desc');
     }
 
     public function attributes(){
@@ -60,16 +60,40 @@ class Project extends Model
     }
 
     public function getTotalRateAttribute(){
-        $total_rate = 0;
-        $total_rate_count = 0;
+        $rate_total = 0;
+        $rate_count = 0;
         foreach($this->comments as $comment){
             if($comment->rate > 0){
-                $total_rate += $comment->rate;
-                $total_rate_count++;
+                $rate_total += $comment->rate;
+                $rate_count++;
             }
         }
 
-        return $total_rate / $total_rate_count;
+        if($rate_count > 0){
+            return [
+                'rate' => $rate_total / $rate_count,
+                'count' => $rate_count,
+            ];
+        }
+        else{
+            return [
+                'rate' => 0,
+                'count' => $rate_count,
+            ];
+        }
+        
+    }
+
+    public function getCommentGroupsAttribute(){
+        $comment_groups = [];
+
+        foreach($this->comments as $comment){
+            if($comment->reply_comment_id == null){
+                $comment_groups[] = [$comment, ...$comment->reply_comments->all()];
+            }
+        }
+
+        return $comment_groups;
     }
 
     /*

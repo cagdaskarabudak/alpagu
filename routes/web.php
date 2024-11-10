@@ -11,6 +11,7 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -22,6 +23,9 @@ Route::get('/project/{slug}.{id}', [ProjectController::class, 'project_view'])->
 Route::get('/get-all-localizations', [LocalizationController::class, 'get_all']);
 Route::post('/set-user-localization', [LocalizationController::class, 'set_user_localization']);
 Route::get('/get-default-localization', [LocalizationController::class, 'get_default_localization']);
+
+Route::post('/comment-create', [CommentController::class, 'store'])->name('comment.create');
+Route::post('/reply-comment-create', [CommentController::class, 'reply_store'])->name('comment.reply.create');
 
 Route::get('/get-default-theme-mode', [ThemeModeController::class, 'get_default_theme_mode']);
 Route::post('/set-default-theme-mode', [ThemeModeController::class, 'set_default_theme_mode']);

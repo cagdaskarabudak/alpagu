@@ -36,5 +36,9 @@
 	- Developed the Rating Component (works similarly to libraries like rate-stars).
 	- Revised the Lightbox Component and fixed bugs.
 
+- **10.11.2024**
+	- Commenting on blog posts and projects in the portfolio, responding to comments, and following the status of the scoring system through comments.
+	- The Rating component was working as read only, now it can be used to get data and interact with the onRateChange emitter.
+
 ## Contact
 *For contact please send an email to [cagdaskarabudak@outlook.com](mailto:cagdaskarabudak@outlook.com).*

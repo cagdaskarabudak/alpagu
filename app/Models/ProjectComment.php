@@ -15,20 +15,24 @@ class ProjectComment extends Model
         'rate',
         'ip_address',
         'project_id',
+        'reply_comment_id',
+        'user_id',
+    ];
+
+    protected $with = [
+        'reply_comments',
+        'user',
     ];
 
     public function project(){
         return $this->belongsTo(Project::class, 'project_id', 'id');
     }
 
-/*
-        *comments       //Yorumlar
-            .comment->name                      //string
-            .comment->email                     //string
-            .comment->content                   //text
-            .comment->rate                      //integer
-            .comment->ip_address                //string
-            .comment->project(project_id)       //foreign
-            .comment->timestamps()              //timestamps
-*/
+    public function reply_comments(){
+        return $this->hasMany(ProjectComment::class, 'reply_comment_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

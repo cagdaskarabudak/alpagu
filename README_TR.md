@@ -36,5 +36,9 @@
 	- Rating Bileşeni geliştirildi (rate-stars gibi kütüphanelere benzer şekilde çalışır).
 	- Lightbox Bileşeni revize edildi ve hatalar giderildi.
 
+- **10.11.2024**
+	- Blog yazılarına ve Portföydeki Projelere yorum yapma, yapılan yorumlara cevap verme, yorum ile derecelendirme sistemi geliştirildi.
+	- Rating bileşeni sadece okunabilir çalışıyordu, artık onRateChange emiti ile veri alınabilir ve etkileşime girilebilir hale getirildi.
+
 ## İletişim
 *İletişim için lütfen [cagdaskarabudak@outlook.com](mailto:cagdaskarabudak@outlook.com) adresine mail gönderin.*

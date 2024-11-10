@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 export default function Customizer(){
-    const customizer_status = usePage().props.auth.customizer;
+    const customizer_status = usePage().props.customizer;
     if(customizer_status){
     const [customizer, setCustomizer] = useState(false);
     const [themeMode, setThemeMode] = useState(null);
@@ -18,7 +18,6 @@ export default function Customizer(){
         if(themeMode != null){
             if(document.querySelector('html').getAttribute('data-bs-theme') != themeMode){
                  document.querySelector('html').setAttribute('data-bs-theme', themeMode);
-                 console.log('değiştirildi!');
             }
         }
     }, [themeMode]);
@@ -116,7 +115,6 @@ export default function Customizer(){
     useEffect(() => {
         if(i18n.language != lang){
             i18n.changeLanguage(lang);
-            console.log('lang changed: ', lang);
         }
     }, [lang])
 
