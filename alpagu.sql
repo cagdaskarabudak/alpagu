@@ -11,7 +11,7 @@
  Target Server Version : 80300 (8.3.0)
  File Encoding         : 65001
 
- Date: 09/11/2024 08:27:25
+ Date: 10/11/2024 06:46:41
 */
 
 SET NAMES utf8mb4;
@@ -24,25 +24,34 @@ DROP TABLE IF EXISTS `blog_article_comments`;
 CREATE TABLE `blog_article_comments` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `article_id` bigint unsigned NOT NULL,
-  `rate` int NOT NULL DEFAULT '0',
+  `rate` int DEFAULT '0',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint unsigned DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reply_comment_id` bigint unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `blog_article_comments_article_id_foreign` (`article_id`),
   KEY `blog_article_comments_user_id_foreign` (`user_id`),
+  KEY `reply_comment_id` (`reply_comment_id`),
   CONSTRAINT `blog_article_comments_article_id_foreign` FOREIGN KEY (`article_id`) REFERENCES `blog_articles` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `blog_article_comments_ibfk_1` FOREIGN KEY (`reply_comment_id`) REFERENCES `blog_article_comments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `blog_article_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of blog_article_comments
 -- ----------------------------
 BEGIN;
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (1, 11, 2, 'Member User', 'member@member.com', 4, '127.0.0.1', 'Deneme yorum', NULL, '2024-11-10 03:12:03', '2024-11-10 03:12:03');
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (2, 11, 5, 'Member User', 'member@member.com', 4, '127.0.0.1', 'asdgadgadgDenemeee', NULL, '2024-11-10 03:12:30', '2024-11-10 03:12:30');
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (3, 11, 1, 'Deneme214', 'agdag@adga.com', NULL, '127.0.0.1', 'admnglkadnmgkaagadg', NULL, '2024-11-10 03:12:50', '2024-11-10 03:12:50');
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (4, 11, NULL, 'Denemeye cevap', 'akmgka@aga.com', NULL, '127.0.0.1', 'admhakdhmadklhmşa', 3, '2024-11-10 03:35:15', '2024-11-10 03:35:15');
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (5, 11, NULL, 'Denemeye Cevap 2', 'admgag@adga.com', NULL, '127.0.0.1', 'adkmgkaldmhkadnhkadhmkadh', 3, '2024-11-10 03:35:50', '2024-11-10 03:35:50');
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (6, 11, NULL, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', 1, '127.0.0.1', 'Member\'a cevap', 2, '2024-11-10 03:36:48', '2024-11-10 03:36:48');
 COMMIT;
 
 -- ----------------------------
@@ -477,25 +486,73 @@ CREATE TABLE `project_comments` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rate` int NOT NULL,
+  `rate` int DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_id` bigint unsigned NOT NULL,
+  `reply_comment_id` bigint unsigned DEFAULT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `project_comments_project_id_foreign` (`project_id`),
+  KEY `reply_comment_id` (`reply_comment_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `project_comments_ibfk_1` FOREIGN KEY (`reply_comment_id`) REFERENCES `project_comments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `project_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `project_comments_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of project_comments
 -- ----------------------------
 BEGIN;
-INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `created_at`, `updated_at`) VALUES (1, 'Example User', 'example@user.com', 'This is Example Comment.', 3, '127.0.0.1', 1, '2024-11-08 07:55:35', NULL);
-INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `created_at`, `updated_at`) VALUES (2, 'Example User 2', 'example@user.com', 'This is example commentt', 5, '127.0.0.1', 1, '2024-11-08 11:59:38', NULL);
-INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `created_at`, `updated_at`) VALUES (3, 'Example User 3', 'example@userrr.com', 'laşdmhlşkadmnshklanmhkşanmfklhafmnklhnalkfnhalfjnhafjlnhaj', 1, '127.0.0.1', 1, '2024-11-08 11:59:58', NULL);
-INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `created_at`, `updated_at`) VALUES (4, 'Çağdaş', 'cagdas@cagads.com', 'oajdpgojadıphjaıpdhjodhoadnhıandlhnladnhadnhjlnhadhna', 4, '127.0.0.1', 1, '2024-11-08 12:00:18', NULL);
-INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `created_at`, `updated_at`) VALUES (5, 'Alpagu', 'alpagu@alpagu.net', 'lorem ipsum adljgadmhkanhşafmnhkafmnhlafnhnadşkagkşn adpgnadkşgn adng adkşgn adngkadn gkşadn gnadkşhand khnşadnhkadn gkadn gkadngşak', 5, '127.0.0.1', 1, '2024-11-08 12:00:47', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (1, 'Example User', 'example@user.com', 'This is Example Comment.', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-08 07:55:35', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (2, 'Example User 2', 'example@user.com', 'This is example commentt', 5, '127.0.0.1', 1, NULL, NULL, '2024-11-08 11:59:38', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (3, 'Example User 3', 'example@userrr.com', 'laşdmhlşkadmnshklanmhkşanmfklhafmnklhnalkfnhalfjnhafjlnhaj', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-08 11:59:58', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (4, 'Çağdaş', 'cagdas@cagads.com', 'oajdpgojadıphjaıpdhjodhoadnhıandlhnladnhadnhjlnhadhna', 4, '127.0.0.1', 1, NULL, NULL, '2024-11-08 12:00:18', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (5, 'Alpagu', 'alpagu@alpagu.net', 'lorem ipsum adljgadmhkanhşafmnhkafmnhlafnhnadşkagkşn adpgnadkşgn adng adkşgn adngkadn gkşadn gnadkşhand khnşadnhkadn gkadn gkadngşak', 5, '127.0.0.1', 1, NULL, NULL, '2024-11-08 12:00:47', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (6, 'Example Reply User', 'example@reply.com', 'akdnmglkadnhlkadhmkladm hkdah madlkmhadkhakha', NULL, '127.0.0.1', 1, 1, NULL, '2024-11-10 02:33:33', NULL);
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (7, 'Çağdaş', 'okcoder1134@gmail.com', 'adlngladkngklaga', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 01:53:41', '2024-11-10 01:53:41');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (8, 'Deneme', 'deneme@deneme.com', 'adkgmakldha', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 01:54:25', '2024-11-10 01:54:25');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (9, 'Deneme', 'deneme@deneme.com', 'adkgmakldha', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 01:55:04', '2024-11-10 01:55:04');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (10, 'asgadgad', 'agaga@cag.com', 'adşlhgmadkhmah', 5, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:00:09', '2024-11-10 02:00:09');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (11, 'asgadgad', 'agaga@cag.com', 'adşlhgmadkhmah', 5, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:02:08', '2024-11-10 02:02:08');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (12, 'Çağdaş', 'admga@aga.com', 'adlkmgkladmha', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:04:56', '2024-11-10 02:04:56');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (13, 'asgadgad', 'adgaaga@aga.com', 'saşlgmadşklhmasdh', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:05:21', '2024-11-10 02:05:21');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (14, 'asgdadhga', 'adgdahadha@aa.com', 'adgimadlşhmaşhmalha', 4, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:06:07', '2024-11-10 02:06:07');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (15, 'Exampleeeee', 'ex@ex.com', 'lkasnglakdngkadngdakha', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:08:30', '2024-11-10 02:08:30');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (16, 'Exampleeeee', 'ex@ex.com', 'lkasnglakdngkadngdakha', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:09:16', '2024-11-10 02:09:16');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (17, 'Exampleeeee', 'ex@ex.com', 'lkasnglakdngkadngdakha', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:10:09', '2024-11-10 02:10:09');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (18, 'EXEXEX', 'ex@ex.com', 'elkwnglakdnhaklhah', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:11:23', '2024-11-10 02:11:23');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (19, 'EXEXEX', 'ex@ex.com', 'elkwnglakdnhaklhah', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:11:31', '2024-11-10 02:11:31');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (20, 'EXEXEX', 'ex@ex.com', 'elkwnglakdnhaklhah', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:13:22', '2024-11-10 02:13:22');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (21, 'EXEXEXXXXXAA', 'easga@abc.com', 'aldngladnhad', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:17:31', '2024-11-10 02:17:31');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (22, 'ashgadhadha', 'agaga@casga.com', 'aşldgmhaşdhmadha', 4, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:19:52', '2024-11-10 02:19:52');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (23, 'last retry', 'adlnglad@agag.com', 'adopmglkadmhkadmhaaadgdg', 4, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:23:11', '2024-11-10 02:23:11');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (24, 'adhdahadh', 'adhhd@oo.com', 'adnllhkadnklhnkadh', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:23:41', '2024-11-10 02:23:41');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (25, 'asgadhgadh', 'adhdah@uu.net', 'adlkmhakdçhmkahlah', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:24:46', '2024-11-10 02:24:46');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (26, 'asdgadhadh', 'asgadga@yy.com', 'aslgmnlkadnhkdnhkkkkk', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:25:12', '2024-11-10 02:25:12');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (27, 'Çağdaşş', 'alkdgmaklg@adga.com', 'kladgmlgkalkgklalllll', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:25:40', '2024-11-10 02:25:40');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (28, 'Elma', 'eaga@adga.com', 'aldkmgakldmgkad', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:26:30', '2024-11-10 02:26:30');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (29, 'Armut', 'adlkmgkadmh@adg.comadgn', 'adklnmldksahnkash', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:28:38', '2024-11-10 02:28:38');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (30, 'Karpuz', 'adkmgka@agda.com', 'admgkladmkga', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:32:08', '2024-11-10 02:32:08');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (31, 'Çilek', 'alkdnglakdg@clk.com', 'akldnhlkaçdhka', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:33:24', '2024-11-10 02:33:24');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (32, 'Yeşil', 'akdlga@adga.com', 'angagadgaadhadhadh', 1, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:33:57', '2024-11-10 02:33:57');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (33, 'asgadgadga', 'adkgmkladgm@adga.com', 'aldşgmlakdmhklaşdhkah', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:34:50', '2024-11-10 02:34:50');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (34, 'asgadga', 'adhadhad@adhad.com', 'adhadhaadgadgadh', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:35:09', '2024-11-10 02:35:09');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (35, 'asgadga', 'ag@ag.com', 'asdgadhgadhadh', 4, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:35:46', '2024-11-10 02:35:46');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (36, 'Çağdaşşşşş', 'adlkgnmakl@adgad.com', 'asgadgdaha', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:35:54', '2024-11-10 02:35:54');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (37, 'asgadhada', 'adgadg@aaaa.com', 'İçerikkadhadhadhah', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:38:00', '2024-11-10 02:38:00');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (38, 'Koyu', 'adhah@koyu.com', 'adklnhkladnhkadnhlakdh', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:38:51', '2024-11-10 02:38:51');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (39, 'Çaşşş', 'asdgadga@adga.com', 'akldmngkladmglkadha', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:39:33', '2024-11-10 02:39:33');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (40, 'asdgöadgaaaaöööö', 'adgadga@adga.com', 'adkmhlkadmhkadhmnkdhlka', NULL, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:39:49', '2024-11-10 02:39:49');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (41, 'çağdaşş', 'agaga@asa.com', 'apgınjaıdghakdmndlha', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:41:44', '2024-11-10 02:41:44');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (42, 'Dneme Yorum', 'adaha@aga.com', 'aldmhakldsmhlkahmça', 2, '127.0.0.1', 1, NULL, NULL, '2024-11-10 02:42:22', '2024-11-10 02:42:22');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (43, 'Deneme Yorum', 'deneme@deneme.com', 'adhlkadhmlkahkşaşladmhadmhşkamha', 2, '127.0.0.1', 2, NULL, NULL, '2024-11-10 02:44:14', '2024-11-10 02:44:14');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (44, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', 'Deneme yorum', 3, '127.0.0.1', 1, NULL, 1, '2024-11-10 02:44:56', '2024-11-10 02:44:56');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (45, 'Member User', 'member@member.com', 'Deneme yorum', 5, '127.0.0.1', 2, NULL, 4, '2024-11-10 02:48:59', '2024-11-10 02:48:59');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (46, 'Member User', 'member@member.com', 'agkladhlkamdhklmalkhmakhma', 5, '127.0.0.1', 1, NULL, 4, '2024-11-10 02:58:36', '2024-11-10 02:58:36');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (47, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', 'Membera cevap 2', NULL, '127.0.0.1', 1, 46, 1, '2024-11-10 03:37:14', '2024-11-10 03:37:14');
 COMMIT;
 
 -- ----------------------------
@@ -640,6 +697,7 @@ CREATE TABLE `projects` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`,`status_id`) USING BTREE,
   KEY `status_id` (`status_id`),
+  KEY `id` (`id`),
   CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `project_status` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -732,14 +790,7 @@ CREATE TABLE `sessions` (
 -- Records of sessions
 -- ----------------------------
 BEGIN;
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('4gKjKFkIzZQOhKM1b2nAe26TEroASvquTphiPQH1', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRGZpYU9GUDlvTGFSWVN4OXpEd1lITFI3R1FMMWtNMHU1Y0VNUWRlNSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6MTg6ImRlZmF1bHRfdGhlbWVfbW9kZSI7czo0OiJkYXJrIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1731126464);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('FgcWjn8EbjQqjA6J90CFmU8yFRH32o2uu30ydhQR', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOUFOdFlOWXJ1VEVGSVlsSW9NdmE1SXRsdHV5czVkUVlReFZRR0RwRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO3M6MTg6ImRlZmF1bHRfdGhlbWVfbW9kZSI7czo1OiJsaWdodCI7fQ==', 1731129532);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('gj46HdSUKILEsU9WZsAM6slTtx9f5JQqjYnK4aCH', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibjkwZm01QmVId09nY3dpQWI3YXZkcTIwakx1Q3JESWpOb2R3eWduQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO30=', 1731129539);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('hkHRmrP7NfpU6x09ehJY1nkiUyyGejGXPlzzZBQR', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaEFkN1dqY0ZhOWJwb1pXdnJDcGJTNFB4MGR5a21EcnlSTTZ4OXoyYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czoxODoiZGVmYXVsdF90aGVtZV9tb2RlIjtzOjU6ImxpZ2h0IjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI2OiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYmxvZyI7fX0=', 1731129638);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('nJdlP1uK7uwSKwHOPiKSzXQfWehxySR3USxBMZvG', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWW1LZHlUaWdMWFdvbzFWaWVrZmxiZmZkUm9nTG9MbWRYT0JZYVFJVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7fQ==', 1731128354);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('NZQnhbAddsweLmE0u3KKeBWlF43nMxSGLuQ7rh6z', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUHYxNlNKR2Q4WUhMZnJoallySEoxVGtXclRkaEJ1THk0V0h2ZWozcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoidHIiO30=', 1731127092);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('uSiUv7VIj6epNEaU1HyMCkTJOdvSHvvQ5Ye0pWpB', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTUxDTVlDZ3ByaG1wTXBTelpOcHFxSEFVMzFjQktTRkE3dmRkYzhhVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO30=', 1731129622);
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('vZd7P6uOzEgj3vEtEfPyThZVaGfZywLox91XF2n6', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZWh3WjZud0QzRmpEZFE3cGZ3alBZUGxkZlNVaDU0YTZKT3d0V1lENSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjU6ImRlZmF1bHRfbG9jYWxpemF0aW9uX2NvZGUiO3M6MjoiZW4iO30=', 1731128051);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('sNgi6xiPmHa4SP7ExTAnsmr9aUYtH9uDnDbPb4AY', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMzNNWjg2cmdTSU5zUHVnVUMxZ0Z6Q3lwS1NkbDh6bWdsOHVGRVZodiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1731210360);
 COMMIT;
 
 -- ----------------------------
@@ -761,6 +812,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`,`role_id`) USING BTREE,
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `role_id` (`role_id`),
+  KEY `id` (`id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -768,9 +820,9 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (1, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', NULL, '$2y$12$z94V321JiwvGBGfGuiUQv.Yb9nslDO7H0/BWGHXxVMu008eP5y4i2', 1, NULL, 'en', 'dark', '2024-11-06 02:11:19', '2024-11-09 05:13:45');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (1, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', NULL, '$2y$12$z94V321JiwvGBGfGuiUQv.Yb9nslDO7H0/BWGHXxVMu008eP5y4i2', 1, NULL, 'en', 'dark', '2024-11-06 02:11:19', '2024-11-10 03:46:00');
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (3, 'Author User', 'author@user.com', NULL, '$2y$12$4/VAovwusqbBXF89lDlgAuebeobMgldz7rLILCMry1d6TQ9.D2isy', 3, NULL, 'tr', 'dark', '2024-11-08 05:35:15', '2024-11-08 05:36:34');
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (4, 'Member User', 'member@member.com', NULL, '$2y$12$5kUaglc7K6aL4EauwesPtuNMIL.wBUgnBXCA.CImvB9TfRaH53OHC', 2, NULL, 'tr', 'dark', '2024-11-08 05:37:07', '2024-11-09 00:06:06');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (4, 'Member User', 'member@member.com', NULL, '$2y$12$5kUaglc7K6aL4EauwesPtuNMIL.wBUgnBXCA.CImvB9TfRaH53OHC', 2, NULL, 'tr', 'light', '2024-11-08 05:37:07', '2024-11-10 02:52:49');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
