@@ -13,7 +13,7 @@ export default function BlogLayout({children, article=null, popularArticles = nu
 
         if(categories.length > 0){
             let categoryElements = categories.map((category, index) => (
-                <Link as="a" href="#" className="category">{category.name}</Link>
+                <Link as="a" href="#" className="category" key={index}>{category.name}</Link>
             ));
 
             setCategoryDoms(categoryElements);
@@ -58,7 +58,7 @@ export default function BlogLayout({children, article=null, popularArticles = nu
                 <Link href={route('article', [comment.article.slug, comment.article.id])} as="a" className="comment" key={index}>
                     <div className="content">{comment.content}</div>
                     <div className="title">{comment.article.title}</div>
-                    <div className="name">{comment.user.name}</div>
+                    <div className="name">{comment.name}</div>
                     <div className="date">{new Date(comment.created_at).toLocaleDateString()}</div>
                 </Link>
             ));

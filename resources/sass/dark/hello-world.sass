@@ -2,6 +2,7 @@ html[data-bs-theme="dark"]
     pre
         position: relative
         background: rgb($dark, 0.5)
+        backdrop-filter: blur(5px)
         border-left: 5px solid $success
         border-right: 1px solid $info
         border-top: 1px solid $info
@@ -21,12 +22,14 @@ html[data-bs-theme="dark"]
             height: 25px
             background-color: $dark
             border: 1px solid $secondary
-            color: $white
+            color: $text-color
             transition: 0.3s
             &:hover
                 background-color: rgb($primary, 0.5)
+                color: $dark
             &:active
                 background-color: rgb($primary, 1)
+                color: $dark
             &.copied
                 background-color: rgb($success, 1)
             &.error

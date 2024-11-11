@@ -9,9 +9,7 @@ use Inertia\Inertia;
 class PortfolioController extends Controller
 {
     public function view(){
-        $projects = Project::with(['status' => function($query) {
-            $query->where('can_view', 1);
-        }])->get();
+        $projects = Project::orderBy('created_at', 'desc')->get();
 
         return Inertia::render('Portfolio/Portfolio', [
             'projects' => $projects,

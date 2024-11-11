@@ -1,6 +1,8 @@
-html[data-bs-theme="dark"]   
+$text-color: $light-secondary
+html[data-bs-theme="dark"]
     body
         background: $dark-secondary
+        color: $text-color
 
     .brand-filigran
         opacity: 0.1
@@ -15,18 +17,28 @@ html[data-bs-theme="dark"]
 
     .modal-header
         background: $dark
-        color: $light
+        color: $text-color
     .modal-body
         background: $dark
-        color: $light
+        color: $text-color
     .modal-footer
         background: $dark
-        color: $light
+        color: $text-color
+
+.ck.ck-powered-by
+    display: none
+
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred
+    background: transparent
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused
+    background: transparent
 
 [data-bs-theme="dark"]
     input[type="text"],
     input[type="email"],
     input[type="password"],
+    input[type="number"],
+    input[type="file"],
     select,
     textarea
         background: rgb($dark, 0.5)
@@ -42,48 +54,70 @@ html[data-bs-theme="dark"]
     .btn-warning,
     .btn-info,
     .btn-dark
-        color: $light
+        color: $text-color
         &:hover
-            color: $light
+            color: $text-color
         &:active
-            color: $light
+            color: $text-color
         &:focus
-            color: $light
-
-    .btn-outline-primary,
-    .btn-outline-secondary,
-    .btn-outline-success,
-    .btn-outline-danger,
-    .btn-outline-warning,
-    .btn-outline-info,
+            color: $text-color
+        
+    .btn-outline-primary
+        &:hover
+            color: $text-color
+        &:active
+            color: $text-color
+    .btn-outline-secondary
+        &:hover
+            color: $text-color
+        &:active
+            color: $text-color
+    .btn-outline-success
+        &:hover
+            color: $text-color
+        &:active
+            color: $text-color
+    .btn-outline-danger
+        &:hover
+            color: $text-color
+        &:active
+            color: $text-color
+    .btn-outline-warning
+        &:hover
+            color: $text-color
+        &:active
+            color: $text-color
+    .btn-outline-info
+        &:hover
+            color: $text-color
+        &:active
+            color: $text-color
     .btn-outline-dark
-        color: $light
         &:hover
-            color: $light
-        
+            color: $text-color
         &:active
-            color: $light
-        
-        &:focus
-            color: $light
+            color: $text-color
         
     .btn-light
-        color: $dark
+        color: $text-color
         &:hover
-            color: $dark
-        
+            color: $text-color
         &:active
-            color: $dark
-        
+            color: $text-color
         &:focus
-            color: $dark
-
+            color: $text-color
 
     input[type="radio"]:checked + label.btn-outline-primary
-        color: $light
+        color: $text-color
 
+    input[type="radio"] + label.btn-outline-primary
+        color: $primary
     .card
         backdrop-filter: blur(5px)
         background: rgb($dark, 0.5)
-    
 
+    .btn-check-label-custom
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column

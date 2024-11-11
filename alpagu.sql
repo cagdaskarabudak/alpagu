@@ -11,7 +11,7 @@
  Target Server Version : 80300 (8.3.0)
  File Encoding         : 65001
 
- Date: 10/11/2024 06:46:41
+ Date: 11/11/2024 11:16:11
 */
 
 SET NAMES utf8mb4;
@@ -40,7 +40,7 @@ CREATE TABLE `blog_article_comments` (
   CONSTRAINT `blog_article_comments_article_id_foreign` FOREIGN KEY (`article_id`) REFERENCES `blog_articles` (`id`) ON DELETE CASCADE,
   CONSTRAINT `blog_article_comments_ibfk_1` FOREIGN KEY (`reply_comment_id`) REFERENCES `blog_article_comments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `blog_article_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of blog_article_comments
@@ -52,6 +52,7 @@ INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`
 INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (4, 11, NULL, 'Denemeye cevap', 'akmgka@aga.com', NULL, '127.0.0.1', 'admhakdhmadklhmşa', 3, '2024-11-10 03:35:15', '2024-11-10 03:35:15');
 INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (5, 11, NULL, 'Denemeye Cevap 2', 'admgag@adga.com', NULL, '127.0.0.1', 'adkmgkaldmhkadnhkadhmkadh', 3, '2024-11-10 03:35:50', '2024-11-10 03:35:50');
 INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (6, 11, NULL, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', 1, '127.0.0.1', 'Member\'a cevap', 2, '2024-11-10 03:36:48', '2024-11-10 03:36:48');
+INSERT INTO `blog_article_comments` (`id`, `article_id`, `rate`, `name`, `email`, `user_id`, `ip_address`, `content`, `reply_comment_id`, `created_at`, `updated_at`) VALUES (7, 12, 5, 'Deneme Yorum', 'deneme@deneme.com', NULL, '127.0.0.1', 'Deneme Yorum içeriği', NULL, '2024-11-10 04:00:38', '2024-11-10 04:00:38');
 COMMIT;
 
 -- ----------------------------
@@ -64,6 +65,7 @@ CREATE TABLE `blog_articles` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `banner` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `view_count` int NOT NULL DEFAULT '0',
   `can_view` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -71,32 +73,33 @@ CREATE TABLE `blog_articles` (
   PRIMARY KEY (`id`),
   KEY `blog_articles_author_id_foreign` (`author_id`),
   CONSTRAINT `blog_articles_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of blog_articles
 -- ----------------------------
 BEGIN;
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (1, 1, 'Qui facilis sed', 'quod-impedit-fuga-aliquid', 'Et blanditiis dolor id. Dolorem ab veniam ipsa voluptas et. Nam deleniti non consequuntur aspernatur voluptatem. Voluptatem sunt unde dignissimos aut harum adipisci.', 11, '1', '2024-11-08 22:39:52', '2024-11-08 22:39:52');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (2, 1, 'Eligendi facilis', 'et-sunt-similique-eos-ut', 'Rerum natus doloremque alias repudiandae. Est id fugit quo labore et. Dolore aut quis non repudiandae error. Debitis magnam illum eveniet aspernatur. Accusamus ut dolor a sunt.', 22, '1', '2024-11-08 22:39:52', '2024-11-08 22:39:52');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (3, 1, 'Qui voluptatum', 'veritatis-minima-expedita-voluptatem-corrupti-tenetur-et-ut', 'Neque a minima non quia eum. In aspernatur rem quia assumenda consequatur cumque. Dolorum quia consequuntur doloremque nulla quia reprehenderit.', 86, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (4, 1, 'Voluptates hic', 'id-repellendus-vel-aliquam-quo-temporibus-consequatur', 'Perferendis voluptates temporibus eum ipsam. Consequatur consectetur pariatur placeat impedit. Ullam illum ut repellat quia aut sit. Commodi a voluptatem tempora omnis minus.', 20, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (5, 1, 'Sint quam aperiam', 'et-ea-a-cumque-necessitatibus-et-corporis-praesentium-veniam', 'Harum est nihil inventore aut qui. Corrupti quam neque possimus at aut sed consectetur pariatur. Explicabo ea quis nisi et sit. Voluptatem et quia provident voluptatibus sunt voluptatem.', 57, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (6, 1, 'Facilis aspernatur', 'facilis-at-ullam-non-placeat-odit', 'Sint aliquid recusandae nemo omnis tempore sint. Et dolores quaerat quis. Reiciendis quia molestias est et. Possimus cupiditate libero reprehenderit non sunt dolor accusamus.', 92, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (7, 1, 'In et', 'velit-veniam-sed-rerum-et-impedit', 'Porro aspernatur omnis quam facilis non. Dolor voluptas vel magnam enim nemo qui et. Ut dolores quas rem quidem ea recusandae veritatis. Dicta officia et ut voluptatem sunt fuga.', 12, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (8, 1, 'Incidunt cum ducimus', 'eveniet-vitae-non-officiis-et-architecto-est-est-ratione', 'Recusandae explicabo quae voluptatem id ab. Vel necessitatibus provident dolore ut ab dolorum molestiae quia. Maiores culpa non asperiores architecto.', 77, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (9, 1, 'Aut eius', 'fugit-consequatur-sint-consectetur-est-autem-quasi-esse', 'Quia quidem laborum aut itaque dolores. Consequatur ratione eum magni dolorum voluptatem dolores autem.', 93, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (10, 1, 'Voluptates consequatur est', 'sit-ipsa-cumque-mollitia-ipsum-aut-rerum-eos', 'Sit eum voluptate laborum facere. Dolorum laudantium natus est libero dolor cupiditate. Minus rerum quasi corrupti. Blanditiis officia animi quam cum cumque quasi. Dolor aut reprehenderit ea ea quas.', 92, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (11, 1, 'Dicta harum', 'nulla-qui-consequatur-laboriosam-molestiae', 'Vel voluptate itaque sit voluptas. Ut vel architecto magnam omnis odio. Optio commodi fuga quidem et ut expedita.', 49, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (12, 1, 'Delectus eaque', 'qui-impedit-illo-tempore-quo', 'Et nihil eum totam sint possimus. Voluptatem similique aut est eos est natus. Laudantium vero impedit laboriosam dolore. Optio numquam magnam qui nulla possimus.', 15, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (13, 1, 'Ab accusantium', 'commodi-excepturi-mollitia-consequatur-sint-unde', 'Quos sunt consequatur et et. Cumque maxime veritatis iure et quia sapiente. Maxime sunt dicta numquam. Perspiciatis assumenda alias pariatur et dignissimos vitae.', 24, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (14, 1, 'Dicta delectus possimus', 'eius-voluptatum-magni-et-in-tenetur-dolor-inventore-neque', 'Qui sapiente perferendis at modi qui ea ipsam dolor. Est est aperiam tempore ullam odit cumque optio. Ea a quia voluptas est id. Ipsam dolorum velit sit sit necessitatibus sequi.', 33, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (15, 1, 'Quis suscipit ratione', 'in-et-voluptas-officia-voluptatum-reiciendis-esse', 'Necessitatibus qui quas quo. Est velit modi animi. Laudantium dolorum id qui.', 86, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (16, 1, 'Voluptatem officia', 'harum-debitis-nam-maxime', 'Tenetur pariatur amet et eveniet. Natus autem consectetur voluptatem iure qui eos voluptate laudantium.', 33, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (17, 1, 'Ea laborum sint', 'id-odio-eos-sunt-non', 'Voluptatem maxime impedit sint deleniti. Nisi repellat animi dolorem repellat sit at vel. Mollitia ex ea accusamus explicabo velit. Facere incidunt hic assumenda magni et.', 71, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (18, 1, 'Nemo et', 'illum-illo-est-voluptates-reprehenderit-nesciunt-earum', 'Vero aut ea illum ratione ut totam. Culpa in facilis natus nulla. Repellendus aut necessitatibus eaque quis rem id quasi.', 14, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (19, 1, 'Eum et reiciendis', 'unde-odit-reprehenderit-deserunt-provident-distinctio', 'Quaerat accusamus possimus ut odit nobis. Placeat et quis nulla doloribus. Sit fugit facilis omnis omnis. Dolorum aut odit sed vel facere doloremque eveniet.', 17, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
-INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (20, 1, 'Dolorum nam', 'eveniet-laboriosam-ullam-odit-nihil-est-dolores', 'Nam exercitationem facere libero deserunt quo nesciunt. Aut labore aut eligendi dolor provident fugit adipisci. Sed harum nulla est aliquam voluptas. Rerum autem eum rerum neque doloribus.', 54, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (1, 1, 'Qui facilis sed', 'quod-impedit-fuga-aliquid', 'Et blanditiis dolor id. Dolorem ab veniam ipsa voluptas et. Nam deleniti non consequuntur aspernatur voluptatem. Voluptatem sunt unde dignissimos aut harum adipisci.', NULL, 11, '1', '2024-11-08 22:39:52', '2024-11-08 22:39:52');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (2, 1, 'Eligendi facilis', 'et-sunt-similique-eos-ut', 'Rerum natus doloremque alias repudiandae. Est id fugit quo labore et. Dolore aut quis non repudiandae error. Debitis magnam illum eveniet aspernatur. Accusamus ut dolor a sunt.', NULL, 22, '1', '2024-11-08 22:39:52', '2024-11-08 22:39:52');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (3, 1, 'Qui voluptatum', 'veritatis-minima-expedita-voluptatem-corrupti-tenetur-et-ut', 'Neque a minima non quia eum. In aspernatur rem quia assumenda consequatur cumque. Dolorum quia consequuntur doloremque nulla quia reprehenderit.', NULL, 86, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (4, 1, 'Voluptates hic', 'id-repellendus-vel-aliquam-quo-temporibus-consequatur', 'Perferendis voluptates temporibus eum ipsam. Consequatur consectetur pariatur placeat impedit. Ullam illum ut repellat quia aut sit. Commodi a voluptatem tempora omnis minus.', NULL, 20, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (5, 1, 'Sint quam aperiam', 'et-ea-a-cumque-necessitatibus-et-corporis-praesentium-veniam', 'Harum est nihil inventore aut qui. Corrupti quam neque possimus at aut sed consectetur pariatur. Explicabo ea quis nisi et sit. Voluptatem et quia provident voluptatibus sunt voluptatem.', NULL, 57, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (6, 1, 'Facilis aspernatur', 'facilis-at-ullam-non-placeat-odit', 'Sint aliquid recusandae nemo omnis tempore sint. Et dolores quaerat quis. Reiciendis quia molestias est et. Possimus cupiditate libero reprehenderit non sunt dolor accusamus.', NULL, 92, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (7, 1, 'In et', 'velit-veniam-sed-rerum-et-impedit', 'Porro aspernatur omnis quam facilis non. Dolor voluptas vel magnam enim nemo qui et. Ut dolores quas rem quidem ea recusandae veritatis. Dicta officia et ut voluptatem sunt fuga.', NULL, 12, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (8, 1, 'Incidunt cum ducimus', 'eveniet-vitae-non-officiis-et-architecto-est-est-ratione', 'Recusandae explicabo quae voluptatem id ab. Vel necessitatibus provident dolore ut ab dolorum molestiae quia. Maiores culpa non asperiores architecto.', NULL, 77, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (9, 1, 'Aut eius', 'fugit-consequatur-sint-consectetur-est-autem-quasi-esse', 'Quia quidem laborum aut itaque dolores. Consequatur ratione eum magni dolorum voluptatem dolores autem.', NULL, 93, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (10, 1, 'Voluptates consequatur est', 'sit-ipsa-cumque-mollitia-ipsum-aut-rerum-eos', 'Sit eum voluptate laborum facere. Dolorum laudantium natus est libero dolor cupiditate. Minus rerum quasi corrupti. Blanditiis officia animi quam cum cumque quasi. Dolor aut reprehenderit ea ea quas.', NULL, 92, '1', '2024-11-08 22:39:53', '2024-11-08 22:39:53');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (11, 1, 'Dicta harum', 'nulla-qui-consequatur-laboriosam-molestiae', 'Vel voluptate itaque sit voluptas. Ut vel architecto magnam omnis odio. Optio commodi fuga quidem et ut expedita.', NULL, 49, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (12, 1, 'Delectus eaque', 'qui-impedit-illo-tempore-quo', 'Et nihil eum totam sint possimus. Voluptatem similique aut est eos est natus. Laudantium vero impedit laboriosam dolore. Optio numquam magnam qui nulla possimus.', NULL, 15, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (13, 1, 'Ab accusantium', 'commodi-excepturi-mollitia-consequatur-sint-unde', 'Quos sunt consequatur et et. Cumque maxime veritatis iure et quia sapiente. Maxime sunt dicta numquam. Perspiciatis assumenda alias pariatur et dignissimos vitae.', NULL, 24, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (14, 1, 'Dicta delectus possimus', 'eius-voluptatum-magni-et-in-tenetur-dolor-inventore-neque', 'Qui sapiente perferendis at modi qui ea ipsam dolor. Est est aperiam tempore ullam odit cumque optio. Ea a quia voluptas est id. Ipsam dolorum velit sit sit necessitatibus sequi.', NULL, 33, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (15, 1, 'Quis suscipit ratione', 'in-et-voluptas-officia-voluptatum-reiciendis-esse', 'Necessitatibus qui quas quo. Est velit modi animi. Laudantium dolorum id qui.', NULL, 86, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (16, 1, 'Voluptatem officia', 'harum-debitis-nam-maxime', 'Tenetur pariatur amet et eveniet. Natus autem consectetur voluptatem iure qui eos voluptate laudantium.', NULL, 33, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (17, 1, 'Ea laborum sint', 'id-odio-eos-sunt-non', 'Voluptatem maxime impedit sint deleniti. Nisi repellat animi dolorem repellat sit at vel. Mollitia ex ea accusamus explicabo velit. Facere incidunt hic assumenda magni et.', NULL, 71, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (18, 1, 'Nemo et', 'illum-illo-est-voluptates-reprehenderit-nesciunt-earum', 'Vero aut ea illum ratione ut totam. Culpa in facilis natus nulla. Repellendus aut necessitatibus eaque quis rem id quasi.', NULL, 14, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (19, 1, 'Eum et reiciendis', 'unde-odit-reprehenderit-deserunt-provident-distinctio', 'Quaerat accusamus possimus ut odit nobis. Placeat et quis nulla doloribus. Sit fugit facilis omnis omnis. Dolorum aut odit sed vel facere doloremque eveniet.', NULL, 17, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (20, 1, 'Dolorum nam', 'eveniet-laboriosam-ullam-odit-nihil-est-dolores', 'Nam exercitationem facere libero deserunt quo nesciunt. Aut labore aut eligendi dolor provident fugit adipisci. Sed harum nulla est aliquam voluptas. Rerum autem eum rerum neque doloribus.', NULL, 54, '1', '2024-11-08 22:47:25', '2024-11-08 22:47:25');
+INSERT INTO `blog_articles` (`id`, `author_id`, `title`, `slug`, `content`, `banner`, `view_count`, `can_view`, `created_at`, `updated_at`) VALUES (21, 1, 'Deneme yAZI', 'deneme-yazi', '<p><strong>dENEME yAZI İÇERİĞİ</strong></p><p><u>Altı Çizili</u><br><br><a href=\"#\"><u>Link</u></a><br>&nbsp;</p><ul><li>Liste 1</li><li><p>Liste 2</p><p><code>Code</code></p><pre><code class=\"language-plaintext\">Code Block</code></pre></li></ul>', 'acWObMFmP70B5rqYMGuHJbiNZWm1jQ3jYfNKha2I.png', 1500, '1', '2024-11-10 14:58:35', '2024-11-10 14:58:35');
 COMMIT;
 
 -- ----------------------------
@@ -110,12 +113,19 @@ CREATE TABLE `blog_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of blog_categories
 -- ----------------------------
 BEGIN;
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (1, 'Example Category 1', 'example-category-1', NULL, NULL);
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (2, 'Example Category 2', 'example-category-2', NULL, NULL);
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (3, 'Example Category 3', 'example-category-3', NULL, NULL);
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (4, 'Example Category 4', 'example-category-4', NULL, NULL);
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (5, 'Example Category 5', 'example-category-5', NULL, NULL);
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (6, 'Example Category 6', 'example-category-6', NULL, NULL);
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (7, 'Example Category 7', 'example-category-7', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -401,7 +411,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
@@ -424,6 +434,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (14, '2024_11_08_09
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (15, '2024_11_08_095038_create_blog_articles_table', 6);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (16, '2024_11_08_095114_create_blog_category_blog_articles_table', 6);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (17, '2024_11_08_100211_create_blog_article_comments_table', 7);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (18, '2024_11_10_153622_create_settings_table', 8);
 COMMIT;
 
 -- ----------------------------
@@ -500,7 +511,7 @@ CREATE TABLE `project_comments` (
   CONSTRAINT `project_comments_ibfk_1` FOREIGN KEY (`reply_comment_id`) REFERENCES `project_comments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `project_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `project_comments_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of project_comments
@@ -553,6 +564,12 @@ INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_ad
 INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (45, 'Member User', 'member@member.com', 'Deneme yorum', 5, '127.0.0.1', 2, NULL, 4, '2024-11-10 02:48:59', '2024-11-10 02:48:59');
 INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (46, 'Member User', 'member@member.com', 'agkladhlkamdhklmalkhmakhma', 5, '127.0.0.1', 1, NULL, 4, '2024-11-10 02:58:36', '2024-11-10 02:58:36');
 INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (47, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', 'Membera cevap 2', NULL, '127.0.0.1', 1, 46, 1, '2024-11-10 03:37:14', '2024-11-10 03:37:14');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (48, 'Example Comment', 'example@example.com', 'Example Comment Content', 4, '127.0.0.1', 1, NULL, NULL, '2024-11-10 03:49:22', '2024-11-10 03:49:22');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (49, 'Example Reply Comment', 'reply@rep.com', 'Example Reply Comment Content', NULL, '127.0.0.1', 1, 48, NULL, '2024-11-10 03:49:41', '2024-11-10 03:49:41');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (50, 'Examaple Comment', 'example@example.com', 'Example Comment Contentt', 5, '127.0.0.1', 1, NULL, NULL, '2024-11-10 03:54:03', '2024-11-10 03:54:03');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (51, 'Example Reply Comment', 'example@ex.com', 'Example Reply Comment Content', NULL, '127.0.0.1', 1, 50, NULL, '2024-11-10 03:54:18', '2024-11-10 03:54:18');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (52, 'Example Comment', 'ex@ex.com', 'Example Comment Content', 3, '127.0.0.1', 1, NULL, NULL, '2024-11-10 03:59:43', '2024-11-10 03:59:43');
+INSERT INTO `project_comments` (`id`, `name`, `email`, `content`, `rate`, `ip_address`, `project_id`, `reply_comment_id`, `user_id`, `created_at`, `updated_at`) VALUES (53, 'Deneme Cevap', 'cevap@afafa.com', 'deneme cevap içeriği', NULL, '127.0.0.1', 1, 52, NULL, '2024-11-10 03:59:58', '2024-11-10 03:59:58');
 COMMIT;
 
 -- ----------------------------
@@ -568,13 +585,14 @@ CREATE TABLE `project_contributors` (
   PRIMARY KEY (`id`),
   KEY `project_contributors_project_id_foreign` (`project_id`),
   CONSTRAINT `project_contributors_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of project_contributors
 -- ----------------------------
 BEGIN;
 INSERT INTO `project_contributors` (`id`, `name`, `url`, `content`, `project_id`) VALUES (1, 'Example Contributor', 'https://alpagu.net', 'Full Stack Developer', 1);
+INSERT INTO `project_contributors` (`id`, `name`, `url`, `content`, `project_id`) VALUES (7, 'contr 1', '#', 'contr1 content', 66);
 COMMIT;
 
 -- ----------------------------
@@ -592,7 +610,7 @@ CREATE TABLE `project_images` (
   PRIMARY KEY (`id`),
   KEY `project_images_project_id_foreign` (`project_id`),
   CONSTRAINT `project_images_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of project_images
@@ -619,6 +637,9 @@ INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created
 INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created_at`, `updated_at`) VALUES (19, 'pimage16.png', NULL, 0, 3, NULL, NULL);
 INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created_at`, `updated_at`) VALUES (20, 'pimage16.png', NULL, 1, 3, NULL, NULL);
 INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created_at`, `updated_at`) VALUES (21, 'pimage16.png', NULL, 2, 3, NULL, NULL);
+INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created_at`, `updated_at`) VALUES (34, 'rSVOvXdFrITLZnpLq5tm4vJMTx8zod4ajrHF7MSg.png', 'rSVOvXdFrITLZnpLq5tm4vJMTx8zod4ajrHF7MSg.png', 0, 66, '2024-11-10 13:19:57', '2024-11-10 13:19:57');
+INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created_at`, `updated_at`) VALUES (35, '5pUaOJRQOQmcXXg1NeUl3Ql0AdyiQG40rcG6mh2J.png', '5pUaOJRQOQmcXXg1NeUl3Ql0AdyiQG40rcG6mh2J.png', 0, 66, '2024-11-10 13:19:57', '2024-11-10 13:19:57');
+INSERT INTO `project_images` (`id`, `src`, `alt`, `sort`, `project_id`, `created_at`, `updated_at`) VALUES (36, 'PkIPelCEMUHIPOJIvUGHappyhOpEmwBWmZtxoWjK.png', 'PkIPelCEMUHIPOJIvUGHappyhOpEmwBWmZtxoWjK.png', 0, 66, '2024-11-10 13:19:57', '2024-11-10 13:19:57');
 COMMIT;
 
 -- ----------------------------
@@ -641,7 +662,7 @@ INSERT INTO `project_status` (`id`, `name`, `color`, `can_view`) VALUES (1, 'Dis
 INSERT INTO `project_status` (`id`, `name`, `color`, `can_view`) VALUES (2, 'Ready', '#70dc38', '1');
 INSERT INTO `project_status` (`id`, `name`, `color`, `can_view`) VALUES (3, 'Developing', '#02c3eb', '1');
 INSERT INTO `project_status` (`id`, `name`, `color`, `can_view`) VALUES (4, 'Pending', '#ffab00', '0');
-INSERT INTO `project_status` (`id`, `name`, `color`, `can_view`) VALUES (5, 'Abandoned', '#ff3e1d', '0');
+INSERT INTO `project_status` (`id`, `name`, `color`, `can_view`) VALUES (5, 'Abandoned', '#ff3e1d', '1');
 COMMIT;
 
 -- ----------------------------
@@ -658,7 +679,7 @@ CREATE TABLE `project_technologies` (
   PRIMARY KEY (`id`),
   KEY `project_technologies_project_id_foreign` (`project_id`),
   CONSTRAINT `project_technologies_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of project_technologies
@@ -676,6 +697,7 @@ INSERT INTO `project_technologies` (`id`, `name`, `image`, `content`, `sort`, `p
 INSERT INTO `project_technologies` (`id`, `name`, `image`, `content`, `sort`, `project_id`) VALUES (10, 'Hero Section', NULL, NULL, 3, 3);
 INSERT INTO `project_technologies` (`id`, `name`, `image`, `content`, `sort`, `project_id`) VALUES (11, 'Registration Form UI', NULL, NULL, 4, 3);
 INSERT INTO `project_technologies` (`id`, `name`, `image`, `content`, `sort`, `project_id`) VALUES (12, 'Testimonial Slider', NULL, NULL, 5, 3);
+INSERT INTO `project_technologies` (`id`, `name`, `image`, `content`, `sort`, `project_id`) VALUES (30, 'tech 1', NULL, 'tech 1 content', 0, 66);
 COMMIT;
 
 -- ----------------------------
@@ -699,7 +721,7 @@ CREATE TABLE `projects` (
   KEY `status_id` (`status_id`),
   KEY `id` (`id`),
   CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `project_status` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of projects
@@ -748,6 +770,7 @@ INSERT INTO `projects` (`id`, `name`, `slug`, `open_source`, `content`, `price`,
 INSERT INTO `projects` (`id`, `name`, `slug`, `open_source`, `content`, `price`, `github_link`, `demo_link`, `view_count`, `status_id`, `created_at`, `updated_at`) VALUES (41, 'Vel natus', 'rerum-voluptatibus-eaque-eligendi-inventore', '0', 'Non voluptas qui dolor ullam dolores sed. Quas itaque quod mollitia tempore sunt sit qui sed. Libero qui voluptatum ut.', 692.00, NULL, NULL, 89, 2, '2024-11-08 10:27:47', '2024-11-08 10:27:47');
 INSERT INTO `projects` (`id`, `name`, `slug`, `open_source`, `content`, `price`, `github_link`, `demo_link`, `view_count`, `status_id`, `created_at`, `updated_at`) VALUES (42, 'Deleniti rerum sit', 'tenetur-sunt-explicabo-repellendus-sed-et-ullam-nihil', '0', 'Amet suscipit fuga aut exercitationem consequuntur. Autem dolor et quos illum aut itaque. Illo sed aut consequuntur consequatur dolore.', 277.00, NULL, NULL, 71, 2, '2024-11-08 10:27:47', '2024-11-08 10:27:47');
 INSERT INTO `projects` (`id`, `name`, `slug`, `open_source`, `content`, `price`, `github_link`, `demo_link`, `view_count`, `status_id`, `created_at`, `updated_at`) VALUES (43, 'Eius ducimus tempora', 'maxime-aspernatur-deserunt-animi-aliquam-ex-fugiat', '0', 'Qui dolorem voluptates et assumenda tenetur quas. Et est repudiandae illo minima adipisci. Sed accusantium et modi magni.', 521.00, NULL, NULL, 35, 2, '2024-11-08 10:27:47', '2024-11-08 10:27:47');
+INSERT INTO `projects` (`id`, `name`, `slug`, `open_source`, `content`, `price`, `github_link`, `demo_link`, `view_count`, `status_id`, `created_at`, `updated_at`) VALUES (66, 'Deneme Proje', 'deneme-proje', '1', 'Deneme Proje Açıklaması', 10.00, '#', '#', 100, 1, '2024-11-10 13:19:57', '2024-11-10 13:19:57');
 COMMIT;
 
 -- ----------------------------
@@ -790,7 +813,50 @@ CREATE TABLE `sessions` (
 -- Records of sessions
 -- ----------------------------
 BEGIN;
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('sNgi6xiPmHa4SP7ExTAnsmr9aUYtH9uDnDbPb4AY', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMzNNWjg2cmdTSU5zUHVnVUMxZ0Z6Q3lwS1NkbDh6bWdsOHVGRVZodiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1731210360);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES ('7OatWBSfVPg97D6xqaqa2rtL9iuUQxyVXeubFuGo', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVTNjc3BVbG9wNW16V1NKNGc3MHM3VDdMUzJQT0I5eUo3S1FwSjRoNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9ibG9nIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyNToiZGVmYXVsdF9sb2NhbGl6YXRpb25fY29kZSI7czoyOiJlbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1731312950);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for settings
+-- ----------------------------
+DROP TABLE IF EXISTS `settings`;
+CREATE TABLE `settings` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `blog` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customizer` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `chat` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `project_comments` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `view_project_comments` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `article_comments` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `view_article_comments` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `registerable` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `site_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo_src` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `search` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `site_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_keywords` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `x_twitter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `discord` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `portfolio` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of settings
+-- ----------------------------
+BEGIN;
+INSERT INTO `settings` (`id`, `blog`, `customizer`, `chat`, `project_comments`, `view_project_comments`, `article_comments`, `view_article_comments`, `registerable`, `site_name`, `logo_src`, `search`, `site_description`, `site_keywords`, `photo`, `email`, `phone`, `name`, `url`, `facebook`, `linkedin`, `instagram`, `x_twitter`, `content`, `discord`, `youtube`, `contact`, `portfolio`) VALUES (1, '1', '1', '0', '1', '1', '1', '1', '1', 'Alpagu Development Site', NULL, '1', 'Alpagu Development Desc', 'alpagu, development, keywords', '1TVwRUxWHlawZ3y9LWNSpMfe5MmXfi6tQKsDnuxF.webp', 'cagdaskarabudak@outlook.com.tr', '5059991134', 'Çağdaş Karabudak (Alpagu Developer) T', 'https://alpagu.net', 'facebook', 'linkedin', 'insta', 'x', NULL, 'discord', 'youtube', '1', '1');
 COMMIT;
 
 -- ----------------------------
@@ -820,7 +886,7 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (1, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', NULL, '$2y$12$z94V321JiwvGBGfGuiUQv.Yb9nslDO7H0/BWGHXxVMu008eP5y4i2', 1, NULL, 'en', 'dark', '2024-11-06 02:11:19', '2024-11-10 03:46:00');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (1, 'Çağdaş Karabudak', 'cagdaskarabudak@outlook.com', '2024-11-10 10:55:06', '$2y$12$z94V321JiwvGBGfGuiUQv.Yb9nslDO7H0/BWGHXxVMu008eP5y4i2', 1, NULL, 'tr', 'dark', '2024-11-06 02:11:19', '2024-11-11 08:15:42');
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (3, 'Author User', 'author@user.com', NULL, '$2y$12$4/VAovwusqbBXF89lDlgAuebeobMgldz7rLILCMry1d6TQ9.D2isy', 3, NULL, 'tr', 'dark', '2024-11-08 05:35:15', '2024-11-08 05:36:34');
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `default_localization_code`, `default_theme_mode`, `created_at`, `updated_at`) VALUES (4, 'Member User', 'member@member.com', NULL, '$2y$12$5kUaglc7K6aL4EauwesPtuNMIL.wBUgnBXCA.CImvB9TfRaH53OHC', 2, NULL, 'tr', 'light', '2024-11-08 05:37:07', '2024-11-10 02:52:49');
 COMMIT;

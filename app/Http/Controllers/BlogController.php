@@ -12,9 +12,9 @@ class BlogController extends Controller
 {
     public function view(){
         $lastArticles = BlogArticle::orderBy('created_at', 'desc')->get();
-        $popularArticles = BlogArticle::all()->sortByDesc('total_rate')->take(5);
-        $lastComments = BlogArticleComment::orderBy('created_at', 'desc')->with('article')->take(5);
-        $categories = BlogCategory::orderBy('name', 'desc')->get();
+        $popularArticles = BlogArticle::orderBy('view_count', 'desc')->limit(5)->get();
+        $lastComments = BlogArticleComment::orderBy('created_at', 'desc')->with('article')->limit(5)->get();
+        $categories = BlogCategory::orderBy('name', 'asc')->get();
 
         return Inertia::render('Blog/Blog', [
             'lastArticles' => $lastArticles,

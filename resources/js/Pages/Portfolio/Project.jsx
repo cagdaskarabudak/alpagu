@@ -10,6 +10,7 @@ import CommentGroup from "@/Components/CommentGroup";
 import Rating from "@/Components/Rating";
 
 export default function Portfolio({project}) {
+    const settings = usePage().props.settings;
     const {t} = useTranslation();
     const [commentGroupDoms, setCommentGroupDoms] = useState();
     const projectCommentsDom = useRef();
@@ -52,10 +53,10 @@ export default function Portfolio({project}) {
 
     return (
         <>
-            <Head title={t('Portfolio')} />
+            <Head title={t(project.name+' - '+settings.site_name)} />
             <MainLayout>
                 <div className="row">
-                    <div className="project">
+                    <div className="project mb-3">
                         <div className="project-header">
                             <div className="project-name">{project.name}
                                 <span style={{color: project.status.color}}>{project.status.name}</span>
@@ -131,37 +132,44 @@ export default function Portfolio({project}) {
                             </div>
                         </div>
                     </div>
-                    <div className="project-comments" ref={projectCommentsDom}>
+                    {
+                        (settings.project_comments == 1 || settings.view_project_comments == 1) &&
+                        <div className="project-comments" ref={projectCommentsDom}>
                         <h5 className="title my-3">Comments</h5>
-                        <form className="reply-form row mb-3" onSubmit={commentFormSubmit}>
-                            <div className="title">Bir Yorum Yazın</div>
-                            <div className="name col-lg-6 mb-3">
-                                <input type="text" placeholder="İsim" className="form-control" value={commentForm.name} onChange={(e) => setCommentForm('name', e.target.value)} required readOnly={usePage().props.auth.user} />
-                                {commentFormErrors.name}
-                            </div>
-                            <div className="email col-lg-6 mb-3">
-                                <input type="email" placeholder="Email" className="form-control" value={commentForm.email} onChange={(e) => setCommentForm('email', e.target.value)} required readOnly={usePage().props.auth.user}/>
-                                {commentFormErrors.email}
-                            </div>
-                            <div className="message col-lg-12 mb-3">
-                                <textarea placeholder="Yorum yazın" className="form-control" onChange={(e) => setCommentForm('message', e.target.value) } value={commentForm.message} required></textarea>
-                                {commentFormErrors.message}
-                            </div>
-                            <div className="name col-lg-12 mb-3">
-                                <Rating starCount={5} readOnly={false} starSize={20} onRateChange={(newRate) => {setCommentForm('rate', newRate);}}></Rating>
-                                {commentFormErrors.rate}
-                            </div>
-                            <div className="col-lg-12">
-                                <button type="submit" className="btn btn-outline-success" disabled={commentFormProcessing}>Yorum Gönder</button>
-                            </div>
-                        </form>
+                        {
+                            settings.project_comments == 1 &&
+                            <form className="reply-form row mb-3" onSubmit={commentFormSubmit}>
+                                <div className="title">Bir Yorum Yazın</div>
+                                <div className="name col-lg-6 mb-3">
+                                    <input type="text" placeholder="İsim" className="form-control" value={commentForm.name} onChange={(e) => setCommentForm('name', e.target.value)} required readOnly={usePage().props.auth.user} />
+                                    {commentFormErrors.name}
+                                </div>
+                                <div className="email col-lg-6 mb-3">
+                                    <input type="email" placeholder="Email" className="form-control" value={commentForm.email} onChange={(e) => setCommentForm('email', e.target.value)} required readOnly={usePage().props.auth.user}/>
+                                    {commentFormErrors.email}
+                                </div>
+                                <div className="message col-lg-12 mb-3">
+                                    <textarea placeholder="Yorum yazın" className="form-control" onChange={(e) => setCommentForm('message', e.target.value) } value={commentForm.message} required></textarea>
+                                    {commentFormErrors.message}
+                                </div>
+                                <div className="name col-lg-12 mb-3">
+                                    <Rating starCount={5} readOnly={false} starSize={20} onRateChange={(newRate) => {setCommentForm('rate', newRate);}}></Rating>
+                                    {commentFormErrors.rate}
+                                </div>
+                                <div className="col-lg-12">
+                                    <button type="submit" className="btn btn-outline-success" disabled={commentFormProcessing}>Yorum Gönder</button>
+                                </div>
+                            </form>
+                        }
                             {
-                                project.comment_groups.length > 0 &&
+                                project.comment_groups.length > 0 && settings.view_project_comments == 1 &&
                                 <>
                                     {commentGroupDoms}
                                 </>
                             }
                     </div>
+                    }
+
                 </div>
 
             </MainLayout>

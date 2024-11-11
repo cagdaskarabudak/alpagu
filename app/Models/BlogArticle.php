@@ -15,6 +15,7 @@ class BlogArticle extends Model
         'title',
         'slug',
         'content',
+        'banner',
         'view_count',
         'can_view',
     ];
@@ -26,6 +27,7 @@ class BlogArticle extends Model
 
     protected $appends = [
         'total_rate',
+        'total_rate_amount',
         'comment_groups',
     ];
 
@@ -53,6 +55,25 @@ class BlogArticle extends Model
         return $comment_groups;
     }
 
+    public function getTotalRateAmountAttribute(){
+        $rate_total = 0;
+        $rate_count = 0;
+
+        foreach($this->comments as $comment){
+            if($comment->rate > 0){
+                $rate_total += $comment->rate;
+                $rate_count++;
+            }
+        }
+
+        if($rate_count > 0){
+            return $rate_total / $rate_count;
+        }
+        else{
+            return 0;
+        }
+    }
+
     public function getTotalRateAttribute(){
         $rate_total = 0;
         $rate_count = 0;
@@ -76,6 +97,5 @@ class BlogArticle extends Model
                 'count' => $rate_count,
             ];
         }
-        
     }
 }

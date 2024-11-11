@@ -1,9 +1,10 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import ApplicationLogo from "./../ApplicationLogo";
 import { useTranslation } from "react-i18next";
 import { Offcanvas } from 'bootstrap';
 
-export default function Navbar({children}) {
+export default function Navbar() {
+    const settings = usePage().props.settings;
     const {t} = useTranslation();
     return (
         <nav className="navbar navbar-expand-lg">
@@ -29,26 +30,36 @@ export default function Navbar({children}) {
                                     <i className="fa-solid fa-home"></i>{t('Home')}
                                 </Link>
                             </li>
-                            <li className={"nav-item"+(route().current() == 'portfolio' || route().current() == 'project.view' ? ' active' : '')}>
-                                <Link href={route('portfolio')} className={'nav-link'+(route().current() == 'portfolio' ? ' active' : '')} as="a">
-                                <i className="fa-solid fa-code"></i>{t('Portfolio')}
-                                </Link>
-                            </li>
-                            <li className={"nav-item"+(route().current() == 'blog' || route().current() == 'article' ? ' active' : '')}>
-                                <Link href={route('blog')} className={'nav-link'+(route().current() == 'blog' ? ' active' : '')} as="a">
-                                <i className="fa-solid fa-books"></i>{t('Blog')}
-                                </Link>
-                            </li>
+                            {
+                                settings.portfolio == 1 && 
+                                    <li className={"nav-item"+(route().current() == 'portfolio' || route().current() == 'project.view' ? ' active' : '')}>
+                                        <Link href={route('portfolio')} className={'nav-link'+(route().current() == 'portfolio' ? ' active' : '')} as="a">
+                                        <i className="fa-solid fa-code"></i>{t('Portfolio')}
+                                        </Link>
+                                    </li>
+                            }
+                            {
+                                settings.blog == 1 &&
+                                <li className={"nav-item"+(route().current() == 'blog' || route().current() == 'article' ? ' active' : '')}>
+                                    <Link href={route('blog')} className={'nav-link'+(route().current() == 'blog' ? ' active' : '')} as="a">
+                                    <i className="fa-solid fa-books"></i>{t('Blog')}
+                                    </Link>
+                                </li>
+
+                            }
                             <li className={"nav-item"+(route().current() == '#' ? ' active' : '')}>
                                 <Link href={'#'} className={'nav-link'+(route().current() == '#' ? ' active' : '')} as="a">
                                 <i className="fa-solid fa-circle-info"></i>{t('About Us')}
                                 </Link>
                             </li>
-                            <li className={"nav-item"+(route().current() == '#' ? ' active' : '')}>
-                                <Link href={'#'} className={'nav-link'+(route().current() == '#' ? ' active' : '')} as="a">
-                                <i className="fa-solid fa-message"></i>{t('Contact')}
-                                </Link>
-                            </li>
+                            {
+                                settings.contact == 1 &&
+                                <li className={"nav-item"+(route().current() == '#' ? ' active' : '')}>
+                                    <Link href={'#'} className={'nav-link'+(route().current() == '#' ? ' active' : '')} as="a">
+                                    <i className="fa-solid fa-message"></i>{t('Contact')}
+                                    </Link>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>

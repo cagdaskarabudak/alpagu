@@ -156,47 +156,64 @@ html[data-bs-theme="dark"]
                         font-weight: 700
                         color: $success
                         text-shadow: 0 0 3px $success
-            .project-comments
-                display: flex
-                justify-content: center
-                align-items: center
-                flex-direction: column
-                .title
-                    font-size: 14pt
-                    color: $secondary
-                .comment-list
+    .project-comments
+        border: 0.5px solid shade-color($dark, 50)
+        background: rgba($dark, 0.8)
+        border-radius: 5px
+        min-height: 50vh
+        margin-top: 1%
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        padding: 10px
+        .title
+            font-size: 14pt
+            color: $secondary
+        .comment-group
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-direction: column
+            width: 100%
+            row-gap: 10px
+            border: 0.5px solid shade-color($dark, 50)
+            margin-bottom: 1%
+            border-radius: 5px
+            .comment
+                padding: 10px
+                width: 100%
+                height: max-content
+                .header
                     display: flex
-                    justify-content: center
+                    justify-content: space-between
+                    align-items: center
+                    margin-bottom: 10px
+                    .name
+                        font-weight: 700
+                        .role
+                            font-size: 10pt
+                            font-weight: normal
+                        .date
+                            font-weight: 300
+                            font-size: 8pt
+                            color: $secondary
+                    .rate
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        gap: 5px
+                .content
+                    display: flex
+                    justify-content: start
                     align-items: center
                     flex-wrap: wrap
-                    gap: 10px
-                    .comment
-                        border-radius: 5px
-                        padding: 10px
-                        max-width: 25%
-                        height: max-content
-                        border: 1px solid shade-color($dark, 50)
-                        .header
-                            display: flex
-                            justify-content: space-between
-                            align-items: center
-                            margin-bottom: 10px
-                            .name
-                                font-weight: 700
-                        .content
-                            display: flex
-                            justify-content: start
-                            align-items: center
-                            flex-wrap: wrap
-                            word-break: break-word
-                            margin-bottom: 10px
-                        .footer
-                            display: flex
-                            justify-content: end
-                            align-items: center
-                            .date
-                                font-size: 10pt
-                                color: $secondary
+                    word-break: break-word
+                    margin-bottom: 10px
+                .footer
+                    display: flex
+                    justify-content: end
+                    align-items: center
 
 
 

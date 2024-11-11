@@ -5,21 +5,29 @@ import { useTranslation } from "react-i18next";
 export default function SecondNavbar({children}) {
     const { t } = useTranslation();
     const auth = usePage().props.auth;
+    const settings = usePage().props.settings;
     return (
         <div className="second-navbar">
-            <div className="navbar-search">
-                <label htmlFor="mainSearch"><i className={"bx bx-search-alt-2"}></i></label>
-                <input type="search" id='mainSearch' className='navbar-search-input' placeholder={t('Search')+'...'} aria-label="Search" />
-            </div>
+            {
+                settings.search == 1 &&
+                <div className="navbar-search">
+                    <label htmlFor="mainSearch"><i className={"bx bx-search-alt-2"}></i></label>
+                    <input type="search" id='mainSearch' className='navbar-search-input' placeholder={t('Search')+'...'} aria-label="Search" />
+                </div>
+
+            }
             <ul className="navbar-nav">
             {
                     auth.user == null ? (
                         <>
+                        {
+                            settings.registerable == 1 &&
                             <li className={"nav-item" + (route().current() === 'register' ? ' active' : '')}>
                                 <Link href={route('register')} className={'nav-link' + (route().current() === 'register' ? ' active' : '')} as="a">
                                 <i className="fa-solid fa-user-plus"></i> {t('Sign Up')}
                                 </Link>
                             </li>
+                        }
                             <li className={"nav-item" + (route().current() === 'login' ? ' active' : '')}>
                                 <Link href={route('login')} className={'nav-link' + (route().current() === 'login' ? ' active' : '')} as="a">
                                 <i className="fa-solid fa-right-to-bracket"></i> {t('Sign In')}

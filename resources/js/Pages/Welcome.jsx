@@ -1,8 +1,9 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import { useTranslation } from 'react-i18next';
 
 export default function Welcome({ auth }) {
+    const settings = usePage().props.settings;
     const { t } = useTranslation();
     const copyCode = (e) => {
         let button = e.currentTarget;
@@ -23,7 +24,7 @@ export default function Welcome({ auth }) {
 
     return (
         <>
-            <Head title={t('Home')} />
+            <Head title={t('Home - '+settings.site_name)} />
             <MainLayout auth={auth}>
                 <h1 className="hello-world">{t('Hello, World!')}</h1>
                 <div className="hello-worlds">

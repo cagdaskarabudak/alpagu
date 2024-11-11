@@ -56,7 +56,7 @@ class Project extends Model
     }
 
     public function status(){
-        return $this->belongsTo(ProjectStatus::class, 'status_id', 'id');
+        return $this->hasOne(ProjectStatus::class, 'id', 'status_id');
     }
 
     public function getTotalRateAttribute(){

@@ -8,6 +8,7 @@ html[data-bs-theme="dark"]
         min-height: 200px
         transform: translateX(100%)
         transition: transform 0.5s ease-in-out
+        color: $text-color
         .customizer-toggler
             background: $dark
             position: absolute
@@ -22,15 +23,20 @@ html[data-bs-theme="dark"]
             align-items: center
             border: 0.5px solid shade-color($dark, 50)
             border-right: none
+            box-shadow: none
+            color: $text-color
+            z-index: 1005
             &:hover
                 .customizer-icon
                     animation: spin 1s linear infinite
         .customizer-body
+            z-index: 1004
             display: block
             background: $dark
             width: 100%
             height: 100%
             border: 0.5px solid shade-color($dark, 50)
+            box-shadow: none
             padding: 10px
             border-radius: 0 0 0 5px
             transition: 0.3s

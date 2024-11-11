@@ -11,6 +11,7 @@ html[data-bs-theme="dark"]
         .live-chat-toggler
             background: $dark
             position: absolute
+            color: $text-color
             width: 100%
             height: 50px
             top: -50px
@@ -22,6 +23,7 @@ html[data-bs-theme="dark"]
             gap: 5px
             border: 0.5px solid shade-color($dark, 50)
             border-bottom: none
+            box-shadow: none
             transition: 0.3s
             &:hover
                 background: shade-color($dark, 5)
@@ -33,6 +35,7 @@ html[data-bs-theme="dark"]
             max-height: 400px
             overflow-y: scroll
             border: 0.5px solid shade-color($dark, 50)
+            box-shadow: none
             border-top: none
             padding: 10px
             transition: 0.3s
@@ -46,6 +49,7 @@ html[data-bs-theme="dark"]
                 top: -60px
                 border: none
                 background: $danger
+                color: $dark
                 z-index: 5
                 font-size: 8pt
             .chat
@@ -67,6 +71,7 @@ html[data-bs-theme="dark"]
                         border-radius: 25px 25px 0 25px
                         max-width: 75%
                         background: $info
+                        color: $dark
                 .reply-message
                     width: 100%
                     position: relative
@@ -83,6 +88,7 @@ html[data-bs-theme="dark"]
                         border-radius: 0 25px 25px 25px
                         max-width: 75%
                         background: $secondary
+                        color: $dark
             .input-area
                 background: $dark
                 box-shadow: 0 0 3px shade-color($dark, 50)

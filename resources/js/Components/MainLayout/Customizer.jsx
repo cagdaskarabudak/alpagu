@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 export default function Customizer(){
-    const customizer_status = usePage().props.customizer;
+    const customizer_status = usePage().props.settings.customizer == 1 ? true : false;
     if(customizer_status){
     const [customizer, setCustomizer] = useState(false);
     const [themeMode, setThemeMode] = useState(null);

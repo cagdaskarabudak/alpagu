@@ -40,5 +40,27 @@
 	- Blog yazılarına ve Portföydeki Projelere yorum yapma, yapılan yorumlara cevap verme, yorum ile derecelendirme sistemi geliştirildi.
 	- Rating bileşeni sadece okunabilir çalışıyordu, artık onRateChange emiti ile veri alınabilir ve etkileşime girilebilir hale getirildi.
 
+- **11.11.2024**
+	- Setting modeli oluşturulup:
+		- Site başlığı
+		- Site açıklaması 
+		- Site anahtar kelimeleri 
+		- site sahibi bilgileri (İsim, Fotoğraf, E-Posta, Telefon, Sosyal Medya)
+		- Site logosu
+		- Customizer Durumu
+		- Live Chat Durumu
+		- Blog sayfası durumu
+		- Portföy sayfası durumu
+		- Blog yazılarına yorum yapabilme durumu
+		- Projelere yorum yapabilme durumu
+		- Blog yazılarındaki yorumların görünürlüğü
+		- Projelerdeki yorumların görünürlüğü
+		yönetilebilir hale getirildi.
+	- Yönetim paneli geliştirildi.
+	- Article ekleme ve Proje ekleme methodları ve sayfaları yazıldı.
+	- CKEditor entegre edildi.
+	- react-lazy-image kütüphanesi entegre edildi.
+	- Dark ve Light SASS dosyaları tekrar eşitlendi.
+
 ## İletişim
 *İletişim için lütfen [cagdaskarabudak@outlook.com](mailto:cagdaskarabudak@outlook.com) adresine mail gönderin.*

@@ -70,5 +70,11 @@
         window.addEventListener('load', () => {
             document.querySelector('.page-loader')?.remove();
         });
+        
     </script>
+    <script>
+      if (typeof global === 'undefined') {
+    window.global = window;
+}
+</script>
 </html>

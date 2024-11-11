@@ -16,8 +16,6 @@ export default function ProjectTechnologies({technologies}){
     return (
             <div className="technology-list">
                 {technologyDoms}
-                {technologyDoms}
-                {technologyDoms}
             </div>
     );
 }

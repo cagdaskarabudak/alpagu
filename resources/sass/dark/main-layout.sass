@@ -1,7 +1,9 @@
 html[data-bs-theme="dark"]
     .main-layout
+        position: relative
         min-height: 100vh
         width: 100vw
+        z-index: 0
         nav
             position: sticky
             top: 0
@@ -41,7 +43,7 @@ html[data-bs-theme="dark"]
                             width: min-content
                             .brand-subtext
                                 font-size: 10pt
-                                color: $secondary
+                                color: $text-color
                         button
                 .offcanvas-body
                     background: $dark
@@ -72,6 +74,7 @@ html[data-bs-theme="dark"]
                     min-width: 10vw
                     transition: 0.3s
                     text-transform: uppercase
+                    color: $text-color
                 &::before
                     content: ''
                     position: absolute
@@ -79,10 +82,11 @@ html[data-bs-theme="dark"]
                     left: 0
                     height: 3px
                     width: 0
-                    background-color: $light
+                    background-color: $text-color
                     transition: all 0.3s ease
                 &.active
                     .nav-link
+                        color: $text-color
                         font-weight: 700
                     &::before
                         width: 100%
@@ -93,6 +97,7 @@ html[data-bs-theme="dark"]
             height: 5vh
             padding-right: 12.5vw
             padding-left: 12.5vw
+            padding-bottom: 0
             display: flex
             justify-content: space-between
             align-items: center
@@ -125,7 +130,7 @@ html[data-bs-theme="dark"]
                     height: 100%
                     outline: none
                     border: none
-                    color: $light
+                    color: $text-color
                     background: rgb(transparent, 0.1)
                     font-size: 16pt
                     padding-left: 2%
@@ -137,19 +142,23 @@ html[data-bs-theme="dark"]
                 align-items: center
                 flex-direction: row
                 column-gap: 10px
+                height: 100%
                 .nav-item
                     position: relative
                     display: flex
                     justify-content: center
                     align-items: center
                     transition: 0.3s
+                    height: 100%
                     &.dropdown
                         .nav-link
+                            color: $text-color
                             &.show
                                 font-weight: 700
                         .dropdown-menu
                             background: $dark
                             .dropdown-item
+                                color: $text-color
                                 &:hover
                                     background: $dark-secondary
                     .nav-link
@@ -161,6 +170,8 @@ html[data-bs-theme="dark"]
                         min-width: 10vw
                         transition: 0.3s
                         font-weight: 400
+                        color: $text-color
+                        transition: 0.3s
                     &::before
                         content: ''
                         position: absolute
@@ -168,16 +179,17 @@ html[data-bs-theme="dark"]
                         left: 0
                         height: 3px
                         width: 0
-                        background-color: $light
-                        transition: all 0.3s ease
+                        background-color: $dark
+                        transition: 0.3s
                     &.active
                         .nav-link
                             font-weight: 700
+                            transition: 0.3s
                         &::before
                             width: 100%
+                            transition: 0.3s
 
         main
-            position: relative
             min-height: 80vh
             width: 100vw
             padding-top: 3vh
@@ -186,6 +198,7 @@ html[data-bs-theme="dark"]
             padding-right: 10vw
             border-radius: 5px
         footer
+            position: relative
             font-size: 10pt
             display: flex
             justify-content: center
@@ -193,4 +206,5 @@ html[data-bs-theme="dark"]
             height: 5vh
             box-shadow: 0 0 3px shade-color($dark, 50)
             background: $dark
+            color: $text-color
             z-index: 1

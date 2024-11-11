@@ -1,10 +1,13 @@
 import BlogLayout from "@/Layouts/BlogLayout";
 import MainLayout from "@/Layouts/MainLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { useEffect, useRef, useState } from "react";
 import Rating from "@/Components/Rating";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function Blog({lastArticles, popularArticles, lastComments, categories}){
+    const settings = usePage().props.settings;
     const blogArticleList = useRef(null);
     const [type, setType] = useState('list');
     const [articleDoms, setArticleDoms] = useState([]);
@@ -13,11 +16,11 @@ export default function Blog({lastArticles, popularArticles, lastComments, categ
         let articleElements = lastArticles.map((article, index) => (
             <Link as="a" href={route('article', [article.slug, article.id])} className="article" key={index}>
                 <div className="banner">
-                    <img src="/storage/images/alpagu.webp" />
+                    <LazyLoadImage effect="blur" src={article.banner != null ? "/storage/images/article_banners/"+article.banner : "/storage/images/alpagu.webp"}/>
                 </div>
                 <div className="content">
                     <div className="title">{article.title}</div>
-                    <div className="content">{article.content}</div>
+                    <div className="content"><div dangerouslySetInnerHTML={{ __html: article.content }} /></div>
                     <div className="rate"><span className="rate-amount">{article.total_rate.rate.toFixed(1)}</span> <Rating starCount={1} rate={article.total_rate.rate/5} starSize={20}/><span className="rate-count">({article.total_rate.count})</span></div>
                     <div className="author"><i className="fa-solid fa-user"></i> {article.author.name}</div>
                     <div className="date"><i className="fa-solid fa-calendar-days"></i> {new Date(article.created_at).toLocaleDateString()}</div>
@@ -39,7 +42,7 @@ export default function Blog({lastArticles, popularArticles, lastComments, categ
       }
     return (
         <MainLayout>
-            <Head title="Blog"/>
+            <Head title={"Blog - "+settings.site_name}/>
             <BlogLayout popularArticles={popularArticles} lastComments={lastComments} categories={categories}>
                 <div className="blog-header">
                     <h5 className="title">Last Articles</h5>

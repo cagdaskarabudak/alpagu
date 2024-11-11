@@ -97,6 +97,7 @@ html[data-bs-theme="light"]
             height: 5vh
             padding-right: 12.5vw
             padding-left: 12.5vw
+            padding-bottom: 0
             display: flex
             justify-content: space-between
             align-items: center
@@ -141,12 +142,14 @@ html[data-bs-theme="light"]
                 align-items: center
                 flex-direction: row
                 column-gap: 10px
+                height: 100%
                 .nav-item
                     position: relative
                     display: flex
                     justify-content: center
                     align-items: center
                     transition: 0.3s
+                    height: 100%
                     &.dropdown
                         .nav-link
                             color: $text-color
@@ -168,6 +171,7 @@ html[data-bs-theme="light"]
                         transition: 0.3s
                         font-weight: 400
                         color: $text-color
+                        transition: 0.3s
                     &::before
                         content: ''
                         position: absolute
@@ -175,13 +179,15 @@ html[data-bs-theme="light"]
                         left: 0
                         height: 3px
                         width: 0
-                        background-color: $light
-                        transition: all 0.3s ease
+                        background-color: $dark
+                        transition: 0.3s
                     &.active
                         .nav-link
                             font-weight: 700
+                            transition: 0.3s
                         &::before
                             width: 100%
+                            transition: 0.3s
 
         main
             min-height: 80vh

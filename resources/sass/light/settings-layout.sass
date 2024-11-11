@@ -1,0 +1,25 @@
+html[data-bs-theme="light"]
+    .settings-nav
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        gap: 10px
+        .settings-nav-link
+            display: flex
+            justify-content: center
+            align-items: center
+            height: 5vh
+            text-decoration: none
+            background: rgb($light, 0.8)
+            border: 1px solid $primary
+            color: $text-color
+            width: 100%
+            border-radius: 5px
+            transition: 0.3s
+            &:hover
+                background: rgb($primary, 0.8)
+                color: $light
+            &.active
+                background: rgb($primary, 1)
+                color: $light

@@ -1,18 +1,20 @@
 import { useEffect, useState, useRef } from "react";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function LightBox({images, defaultStorage='/storage/images/project_images/'}){
     const [imageDoms, setImageDoms] = useState([]);
     const [activeImage, setActiveImage] = useState(null);
     const lightBoxDom = useRef(null);
-    const lightBoxViewImage = useRef(null);
+    const [lightBoxViewImage, setLightBoxViewImage] = useState([]);
     useEffect(() => {
         const imageElements = images.map((image, index) => (
             <div className="image" key={index} onClick={() => {
                 setActiveImage({
-                    image: image, 
+                    src: defaultStorage+image.src,
                     index: index});
             }}>
-                <img src={defaultStorage+image.src} alt={image.alt}/>
+                <LazyLoadImage src={defaultStorage+image.src} alt={image.alt} effect="blur"/>
             </div>
         ));
 
@@ -29,19 +31,21 @@ export default function LightBox({images, defaultStorage='/storage/images/projec
     }, [activeImage]);
 
     const OpenLightBoxView = ()=>{
-        lightBoxViewImage.current.src = defaultStorage+activeImage.image.src;
         lightBoxDom.current.style.display = 'flex';
+        setLightBoxViewImage(
+            <LazyLoadImage src={activeImage.src} effect="blur" />
+        );
     }
 
     const closeLightBoxViewSecond = () => {
-        lightBoxViewImage.current.src = '';
+        setLightBoxViewImage('');
         setActiveImage(null);
         lightBoxDom.current.style.display = 'none';
     }
 
     const closeLightBoxView = (event) => {
         if(event.target.classList.contains('lightbox-view')){
-            lightBoxViewImage.current.src = '';
+            setLightBoxViewImage('');
             setActiveImage(null);
             lightBoxDom.current.style.display = 'none';
         }
@@ -51,7 +55,7 @@ export default function LightBox({images, defaultStorage='/storage/images/projec
         let newActiveImage = images[activeImage.index-1];
         if(newActiveImage){
             setActiveImage({
-                image: newActiveImage,
+                src: defaultStorage+newActiveImage.src,
                 index: activeImage.index-1,
             });
         }
@@ -60,7 +64,7 @@ export default function LightBox({images, defaultStorage='/storage/images/projec
         let newActiveImage = images[activeImage.index+1];
         if(newActiveImage){
             setActiveImage({
-                image: newActiveImage,
+                src: defaultStorage+newActiveImage.src,
                 index: activeImage.index+1,
             });
         }
@@ -74,9 +78,9 @@ export default function LightBox({images, defaultStorage='/storage/images/projec
             <div className="lightbox-view" onClick={closeLightBoxView} ref={lightBoxDom}>
                 <div className="image">
                     <button className={'btn btn-danger rounded-circle close-btn'} onClick={closeLightBoxViewSecond}><i className="fa-solid fa-x"></i></button>
-                    <button className={'btn btn-dark rounded-circle prev-btn'} onClick={prevLightBoxView}><i className="fa-solid fa-chevron-left"></i></button>
-                    <button className={'btn btn-dark rounded-circle next-btn'} onClick={nextLightBoxView}><i className="fa-solid fa-chevron-right"></i></button>
-                    <img src="" alt="" ref={lightBoxViewImage}/>
+                    <button className={'btn btn-dark rounded-circle prev-btn'} disabled={activeImage != null && activeImage.index == 0} onClick={prevLightBoxView}><i className="fa-solid fa-chevron-left"></i></button>
+                    <button className={'btn btn-dark rounded-circle next-btn'} disabled={activeImage != null && activeImage.index == images.length-1} onClick={nextLightBoxView}><i className="fa-solid fa-chevron-right"></i></button>
+                    {lightBoxViewImage}
                 </div>
             </div>
         </div>
